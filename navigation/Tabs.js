@@ -1,5 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Entypo from "@expo/vector-icons/Entypo";
 
 import Home from "../pages/Home";
 import Font from "../context/font";
@@ -31,6 +33,20 @@ export default function Tabs() {
         }}
       >
         <Tab.Screen
+          name="training"
+          component={Home}
+          options={{
+            tabBarIcon: ({ focus, color }) => (
+              <Ionicons
+                name="cafe"
+                size={24}
+                color={focus ? "black" : "#2b71f2"}
+              />
+            ),
+            headerTitle: "اموزش",
+          }}
+        />
+        <Tab.Screen
           name="ads"
           component={Home}
           options={{
@@ -42,6 +58,34 @@ export default function Tabs() {
               />
             ),
             headerTitle: "تبلیغات",
+          }}
+        />
+        <Tab.Screen
+          name="report"
+          component={Home}
+          options={{
+            tabBarIcon: ({ focus, color }) => (
+              <Entypo
+                name="chat"
+                size={24}
+                color={focus ? "black" : "#2b71f2"}
+              />
+            ),
+            headerTitle: "گزارش های ارسالی",
+          }}
+        />
+        <Tab.Screen
+          name="profile"
+          component={Home}
+          options={{
+            tabBarIcon: ({ focus, color }) => (
+              <Entypo
+                name="user"
+                size={24}
+                color={focus ? "black" : "#2b71f2"}
+              />
+            ),
+            headerTitle: "حساب کاربری",
           }}
         />
       </Tab.Navigator>
