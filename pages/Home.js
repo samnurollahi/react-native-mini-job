@@ -1,5 +1,7 @@
 import { Pressable, ScrollView, Text, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function () {
   return (
@@ -55,13 +57,44 @@ export default function () {
         </Pressable>
       </View>
 
-      <View style={{flex: 1, direction: "rtl", marginTop: 30, padding: 25,}}>
+      <View style={{ flex: 1, direction: "rtl", padding: 25 }}>
         <ScrollView>
-            <View>
-                <Text>
-                    ثبت نام در بلوبانک
-                </Text>
+          <Pressable
+            style={{ backgroundColor: "#fff", padding: 20, borderRadius: 15, outlineWidth: 3, outlineColor: "#2979FF", outlineOffset: 0, marginTop: 30,}}
+          >
+            <Text
+              style={{ color: "#212121", fontFamily: "vazir", fontSize: 16 }}
+            >
+              ثبت نام در بلوبانک
+            </Text>
+
+            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
+              <FontAwesome6 name="money-bills" size={18} color="#2979FF" />
+              <Text style={{marginRight: 15}}>مقدار هزینه: 20.000 تومان</Text>
             </View>
+            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
+            <MaterialIcons name="category" size={18} color="#2979FF" />
+              <Text style={{marginRight: 15}}>احرازهویتی</Text>
+            </View>
+          </Pressable>
+          <Pressable
+            style={{ backgroundColor: "#fff", padding: 20, borderRadius: 15, marginTop: 30,}}
+          >
+            <Text
+              style={{ color: "#212121", fontFamily: "vazir", fontSize: 16 }}
+            >
+              ثبت نام در بلوبانک
+            </Text>
+
+            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
+              <FontAwesome6 name="money-bills" size={18} color="#2979FF" />
+              <Text style={{marginRight: 15}}>مقدار هزینه: 20.000 تومان</Text>
+            </View>
+            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
+            <MaterialIcons name="category" size={18} color="#2979FF" />
+              <Text style={{marginRight: 15}}>احرازهویتی</Text>
+            </View>
+          </Pressable>
         </ScrollView>
       </View>
     </>
