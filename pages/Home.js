@@ -3,6 +3,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+
 export default function () {
   return (
     <>
@@ -60,7 +61,7 @@ export default function () {
       <View style={{ flex: 1, direction: "rtl", padding: 25 }}>
         <ScrollView>
           <Pressable
-            style={{ backgroundColor: "#fff", padding: 20, borderRadius: 15, outlineWidth: 3, outlineColor: "#2979FF", outlineOffset: 0, marginTop: 30,}}
+            style={{ backgroundColor: "#fff", padding: 20, borderRadius: 15, borderWidth: 5, borderColor: "#2979FF", marginTop: 30,}}
           >
             <Text
               style={{ color: "#212121", fontFamily: "vazir", fontSize: 16 }}
