@@ -1,3 +1,4 @@
+import { Pressable } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -5,11 +6,20 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import Home from "../pages/Home";
-import Font from "../context/font";
 import Trainig from "../pages/Trainig";
+import AccountUser from "../pages/AccountUser";
+import Report from "../pages/Report";
+import Login from "../pages/Login";
+import Auth from "../pages/Auth";
+import Questions from "../pages/Questions";
+import SingelAd from "../pages/SingelAd";
+import Chat from "../pages/Chat";
+import SingelTrain from "../pages/SingelTrain";
+import ZirMajmoe from "../pages/ZirMajmoe";
 
 const Tab = createBottomTabNavigator();
-export default function Tabs() {
+export default function Tabs({ token }) {
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -17,22 +27,55 @@ export default function Tabs() {
         headerTitleStyle: {
           fontFamily: "vazir",
           color: "#fff",
-          fontSize: 22,
-          marginTop: 10
+          fontSize: 18,
         },
         headerStyle: {
-          height: 100,
+          height: 65,
           backgroundColor: "#2979FF",
         },
         animation: "shift",
         headerShadowVisible: false,
         tabBarStyle: {
-          height: 70,
+          height: 55,
+          // marginBottom: 35,
+          paddingBottom: 0,
           shadowColor: "white",
-          marginBottom: 50,
         },
       }}
     >
+      {token ? (
+        <></>
+      ) : (
+        <>
+          <Tab.Screen
+            name="login"
+            component={Login}
+            options={{
+              headerShown: false,
+              tabBarStyle: {
+                display: "none",
+              },
+              tabBarItemStyle: {
+                display: "none"
+              }
+            }}
+          />
+          <Tab.Screen
+            name="auth"
+            component={Auth}
+            options={{
+              headerShown: false,
+              tabBarStyle: {
+                display: "none",
+              },
+              tabBarItemStyle: {
+                display: "none"
+              },
+            }}
+          />
+        </>
+      )}
+
       <Tab.Screen
         name="training"
         component={Trainig}
@@ -46,6 +89,8 @@ export default function Tabs() {
           ),
           title: "آموزش",
           tabBarLabel: "آموزش",
+          headerBackVisible: false, // دکمه Back هدر را مخفی می‌کند
+          gestureEnabled: false,    // Back با swipe را غیر فعال می‌کند
         }}
       />
       <Tab.Screen
@@ -65,7 +110,7 @@ export default function Tabs() {
       />
       <Tab.Screen
         name="report"
-        component={Home}
+        component={Report}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Entypo
@@ -80,7 +125,7 @@ export default function Tabs() {
       />
       <Tab.Screen
         name="profile"
-        component={Home}
+        component={AccountUser}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Entypo
@@ -91,8 +136,89 @@ export default function Tabs() {
           ),
           headerTitle: "حساب کاربری",
           tabBarLabel: "حساب کاربری",
+          headerRight: () => (
+            <Pressable>
+              <AntDesign
+                name="setting"
+                size={24}
+                color="white"
+                style={{ paddingRight: 20, marginTop: 10 }}
+              />
+            </Pressable>
+          ),
         }}
       />
+
+
+      {/* hide screen  */}
+      <Tab.Screen
+        name="questions"
+        component={Questions}
+        options={{
+          headerTitle: "سوالات متداول",
+          tabBarLabel: "سوالات متداول",
+          tabBarItemStyle: {
+            display: "none"
+          },
+          tabBarStyle: {
+            display: "none"
+          }
+        }}
+      />
+      <Tab.Screen
+        name="singelAd"
+        component={SingelAd}
+        options={{
+          headerTitle: "صفحه تبلیغ",
+          tabBarItemStyle: {
+            display: "none"
+          },
+          tabBarStyle: {
+            display: "none"
+          }
+        }}
+      />
+      <Tab.Screen
+        name="singelTrain"
+        component={SingelTrain}
+        options={{
+          headerTitle: "آموزش",
+          tabBarItemStyle: {
+            display: "none"
+          },
+          tabBarStyle: {
+            display: "none"
+          }
+        }}
+      />
+      <Tab.Screen
+        name="chat"
+        component={Chat}
+        options={{
+          headerTitle: "ارتباط با پشتیبانی",
+          tabBarItemStyle: {
+            display: "none"
+          },
+          tabBarStyle: {
+            display: "none"
+          }
+        }}
+      />
+      <Tab.Screen
+        name="zirMajmoe"
+        component={ZirMajmoe}
+        options={{
+          headerTitle: "زیر مجموعه گیری",
+          tabBarItemStyle: {
+            display: "none"
+          },
+          tabBarStyle: {
+            display: "none"
+          }
+        }}
+      />
+
+
     </Tab.Navigator>
   );
 }

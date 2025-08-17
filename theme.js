@@ -21,4 +21,3 @@ const BlueTheme = {
       success: '#388E3C',           // رنگ موفقیت (سبز)
     },
   };
-  

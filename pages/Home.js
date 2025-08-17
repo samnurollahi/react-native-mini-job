@@ -1,103 +1,137 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+  Viewm,
+} from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
+import { useCallback, useEffect, useState } from "react";
+import Ads from "../components/Ads";
+import Service from "../service/main.service";
+import SortModal from "../components/SortModal";
+import { useFocusEffect } from "@react-navigation/native";
+import FilterModalByCategory from "../components/filterModalByCategory";
 
 export default function () {
+  const [ads, setAds] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [sortModal, setSortModal] = useState(false);
+  const [sort, setSort] = useState("DESC");
+  const [filterCategoryModal, setFilterCategoryModal] = useState(false);
+  const [category, setCategory] = useState([]);
+
+  const getData = async (sort, caregory) => {
+    const data = await Service.getAds(sort, caregory);
+    setAds(data.ads);
+    setLoaded(true);
+  };
+  const renderItem = async ({ item }) => {
+    return (
+      <Ads
+        title={item.title}
+        price={item.price}
+        categorys={JSON.parse(item.caregory)}
+        id={item.id}
+      />
+    );
+  };
+
+  useEffect(() => {
+    setLoaded(false);
+    getData(sort, category);
+    console.log(category);
+  }, [sort, category]);
   return (
     <>
-      <View style={{ direction: "rtl", display: "flex", flexDirection: "row" }}>
-        <Pressable
-          style={{
-            direction: "rtl",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            padding: 10,
-            borderRadius: 7,
-            borderColor: "gray",
-            borderWidth: 1,
-            marginRight: 10,
-            marginTop: 10,
-          }}
-        >
-          <AntDesign name="filter" size={20} color="black" />
-          <Text
-            style={{
-              fontFamily: "vazir",
-              fontSize: 12,
-            }}
+      {loaded ? (
+        <>
+          <View
+            style={{ direction: "rtl", display: "flex", flexDirection: "row" }}
           >
-            فیلتر بر اساس دسته بندی
-          </Text>
-        </Pressable>
-        <Pressable
-          style={{
-            direction: "rtl",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            padding: 10,
-            borderRadius: 7,
-            borderColor: "gray",
-            borderWidth: 1,
-            marginRight: 10,
-            marginTop: 10,
-          }}
-        >
-          <AntDesign name="swap" size={20} color="black" />
-          <Text
-            style={{
-              fontFamily: "vazir",
-              fontSize: 12,
-            }}
-          >
-            مرتب سازی
-          </Text>
-        </Pressable>
-      </View>
-
-      <View style={{ flex: 1, direction: "rtl", padding: 25 }}>
-        <ScrollView>
-          <Pressable
-            style={{ backgroundColor: "#fff", padding: 20, borderRadius: 15, borderWidth: 5, borderColor: "#2979FF", marginTop: 30,}}
-          >
-            <Text
-              style={{ color: "#212121", fontFamily: "vazir", fontSize: 16 }}
+            <Pressable
+            onPress={()=>setFilterCategoryModal(true)}
+              style={{
+                direction: "rtl",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                padding: 10,
+                borderRadius: 7,
+                borderColor: "gray",
+                borderWidth: 1,
+                marginRight: 10,
+                marginTop: 10,
+              }}
             >
-              ثبت نام در بلوبانک
-            </Text>
-
-            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
-              <FontAwesome6 name="money-bills" size={18} color="#2979FF" />
-              <Text style={{marginRight: 15}}>مقدار هزینه: 20.000 تومان</Text>
-            </View>
-            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
-            <MaterialIcons name="category" size={18} color="#2979FF" />
-              <Text style={{marginRight: 15}}>احرازهویتی</Text>
-            </View>
-          </Pressable>
-          <Pressable
-            style={{ backgroundColor: "#fff", padding: 20, borderRadius: 15, marginTop: 30,}}
-          >
-            <Text
-              style={{ color: "#212121", fontFamily: "vazir", fontSize: 16 }}
+              <AntDesign name="filter" size={20} color="black" />
+              <Text
+                style={{
+                  fontFamily: "vazir",
+                  fontSize: 12,
+                }}
+              >
+                فیلتر بر اساس دسته بندی
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={() => setSortModal(true)}
+              style={{
+                direction: "rtl",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                padding: 10,
+                borderRadius: 7,
+                borderColor: "gray",
+                borderWidth: 1,
+                marginRight: 10,
+                marginTop: 10,
+              }}
             >
-              ثبت نام در بلوبانک
-            </Text>
+              <AntDesign name="swap" size={20} color="black" />
+              <Text
+                style={{
+                  fontFamily: "vazir",
+                  fontSize: 12,
+                }}
+              >
+                مرتب سازی
+              </Text>
+            </Pressable>
+          </View>
 
-            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
-              <FontAwesome6 name="money-bills" size={18} color="#2979FF" />
-              <Text style={{marginRight: 15}}>مقدار هزینه: 20.000 تومان</Text>
-            </View>
-            <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 15}}>
-            <MaterialIcons name="category" size={18} color="#2979FF" />
-              <Text style={{marginRight: 15}}>احرازهویتی</Text>
-            </View>
-          </Pressable>
-        </ScrollView>
-      </View>
+          <View style={{ flex: 1, direction: "rtl", paddingHorizontal: 25 }}>
+            <FlatList
+              style={{ flex: 1 }}
+              data={ads}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+
+          {/* modal */}
+          <SortModal
+            visible={sortModal}
+            setvisible={setSortModal}
+            sort={sort}
+            setSort={setSort}
+          />
+          <FilterModalByCategory
+            visible={filterCategoryModal}
+            setvisible={setFilterCategoryModal}
+            category={category}
+            setCategory={setCategory}
+          />
+        </>
+      ) : (
+        <>
+          <ActivityIndicator size={"large"} style={{ margin: "auto" }} />
+        </>
+      )}
     </>
   );
 }
