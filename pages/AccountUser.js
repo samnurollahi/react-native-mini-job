@@ -33,53 +33,58 @@ export default (props) => {
     navigation.addListener("focus", () => {
       setLoaded(false);
       getData();
-      if(
-        props.route.params.newLogin
-      ) {
-        console.log("new login");
-        const backAction = () => {
-          try {
-            const state = navigationRef.current?.getRootState();
-            if (!state) return false;
-      
-            // صفحه فعلی در Tab
-            let route = state.routes[state.index];
-            let nestedState = route.state;
-      
-            while (nestedState && nestedState.index !== undefined) {
-              route = nestedState.routes[nestedState.index];
-              nestedState = route.state;
-            }
-      
-            const currentRouteName = route.name;
-      
-            // صفحات استثنا → Back پیش‌فرض
-            if (backAllowedScreens.includes(currentRouteName)) {
-              return false;
-            }
-      
-            // اگر صفحه فعلی Root هست → Confirm Exit
-            if (state.index === 0) {
-              const now = Date.now();
-              if (backPressTimeRef.current && now - backPressTimeRef.current < 2000) {
-                BackHandler.exitApp();
+      try {
+        if(
+          props.route.params.newLogin
+        ) {
+          console.log("new login");
+          const backAction = () => {
+            try {
+              const state = navigationRef.current?.getRootState();
+              if (!state) return false;
+        
+              // صفحه فعلی در Tab
+              let route = state.routes[state.index];
+              let nestedState = route.state;
+        
+              while (nestedState && nestedState.index !== undefined) {
+                route = nestedState.routes[nestedState.index];
+                nestedState = route.state;
+              }
+        
+              const currentRouteName = route.name;
+        
+              // صفحات استثنا → Back پیش‌فرض
+              if (backAllowedScreens.includes(currentRouteName)) {
+                return false;
+              }
+        
+              // اگر صفحه فعلی Root هست → Confirm Exit
+              if (state.index === 0) {
+                const now = Date.now();
+                if (backPressTimeRef.current && now - backPressTimeRef.current < 2000) {
+                  BackHandler.exitApp();
+                  return true;
+                }
+                ToastAndroid.show("برای خروج دوباره کلیک کنید", ToastAndroid.SHORT);
+                backPressTimeRef.current = now;
                 return true;
               }
-              ToastAndroid.show("برای خروج دوباره کلیک کنید", ToastAndroid.SHORT);
-              backPressTimeRef.current = now;
-              return true;
+        
+              // در غیر این صورت → Back پیش‌فرض Navigation
+              return false;
+        
+            } catch {
+              return false;
             }
-      
-            // در غیر این صورت → Back پیش‌فرض Navigation
-            return false;
-      
-          } catch {
-            return false;
-          }
-        };
-      
-        BackHandler.addEventListener("hardwareBackPress", backAction);
+          };
+        
+          BackHandler.addEventListener("hardwareBackPress", backAction);
+        }
+      } catch (err) {
+          console.log(err);
       }
+
     })
   }, []);
   useEffect(() => {

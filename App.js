@@ -38,7 +38,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    checkVpn();
+    // checkVpn();
+    tokner()
   }, [isConnected]);
   const navigationRef = useRef(null);
   const backAllowedScreens = ["chat", "chats"];

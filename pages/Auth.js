@@ -7,6 +7,7 @@ import LottieView from "lottie-react-native";
 import * as Notif from "expo-notifications"
 import AsyncStorage from "@react-native-async-storage/async-storage";
  import Constants from 'expo-constants';
+import { OtpInput } from "react-native-otp-entry";
 
 export default function (data) {
   const phoneNumber = data.route.params.phoneNumber
@@ -17,16 +18,20 @@ export default function (data) {
   const navigation = useNavigation()
 
   const submit = async () => {
-    const result = await Service.checkCode(code, phoneNumber)
-    await AsyncStorage.setItem("token", result.data.token)
-    // notif()
-
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'profile', params: {newLogin: true} }],
-      })
-    );
+    if(data.route.params.code == code) {
+      const result = await Service.checkCode(code, phoneNumber)
+      await AsyncStorage.setItem("token", result.data.token)
+      // notif()
+  
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: 'profile', params: {newLogin: true} }],
+        })
+      );
+    }else {
+      setIsError(true)
+    }
   };
   const notif = async () => {
     try {
@@ -53,22 +58,12 @@ export default function (data) {
         <Text style={{ fontSize: 16, fontFamily: "vazir", textAlign: 'center', marginTop: 10, }}>
           کد اعتبارسنجی برای شما پیامک شد
         </Text>
-        <TextInput
-          placeholder="09123...."
-          style={{
-            fontFamily: "vazir",
-            borderWidth: 1,
-            borderColor: isError ? "#D32F2F" : "#ccc",
-            borderRadius: 5,
-            marginTop: 5,
-          }}
-          keyboardType="number-pad"
-          onChangeText={setCode}
-          value={code}
-        />
+        <View style={{direction: "ltr"}}>
+        <OtpInput numberOfDigits={6} onTextChange={(text) => setCode(text)}  />
+        </View>
         {isError ? (
-          <Text style={{ marginTop: 3, color: "#D32F2F" }}>
-            شماره موبایل وارد شده نادرست است.
+          <Text style={{ marginTop: 3, color: "#D32F2F", fontFamily: "vazir" }}>
+            کد اشتباه است
           </Text>
         ) : (
           <></>

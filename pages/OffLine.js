@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 
 export default function() {
     return (
-        <View style={{margin: "auto"}}>
+        <View style={{margin: "auto", backgroundColor: "#fff"}}>
         <LottieView
           source={require("../assets/anim/offline.json")}
           style={{width: 150, height: 150}}

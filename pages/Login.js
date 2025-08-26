@@ -31,7 +31,7 @@ export default function () {
       console.log("ok");
       setIsError(false)
       // navigation.replace("auth", { phoneNumber: phoneNumberText });
-      navigation.navigate("auth", {phoneNumber: phoneNumberText})
+      navigation.navigate("auth", {phoneNumber: phoneNumberText, code: result.data.code})
     }
   };
 
@@ -55,9 +55,10 @@ export default function () {
           keyboardType="number-pad"
           onChangeText={setPhoneNumberText}
           value={phoneNumberText}
+          maxLength={11}
         />
         {isError ? (
-          <Text style={{ marginTop: 3, color: "#D32F2F" }}>
+          <Text style={{ marginTop: 3, color: "#D32F2F" , fontFamily: "vazir"}}>
             شماره موبایل وارد شده نادرست است.
           </Text>
         ) : (
