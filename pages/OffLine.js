@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 
 export default function() {
     return (
+      <View style={{backgroundColor: "#fff", width: "100%", flex: 1}}>
         <View style={{margin: "auto", backgroundColor: "#fff"}}>
         <LottieView
           source={require("../assets/anim/offline.json")}
@@ -16,6 +17,7 @@ export default function() {
         <Text style={{fontFamily: "vazir", textAlign: "center", width: "50%", direction: "rtl"}}>
           VPN را خاموش کنید
         </Text>
+      </View>
       </View>
     )
 }

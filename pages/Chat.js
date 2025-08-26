@@ -60,7 +60,7 @@ export default function () {
       obj.view = c.view;
       obj.chat = c.msg;
       obj.type = c.type;
-      obj.url = `http://192.168.1.8:3000/uploads/${c.url}`;
+      obj.url = `https://komakkharj.ir/uploads/${c.url}`;
       if (c.sender == "user") {
         obj.isMySend = true;
       } else {
@@ -82,7 +82,7 @@ export default function () {
     if (!result.canceled) {
       try {
         const xhttp = new XMLHttpRequest();
-        xhttp.open("post", "http://192.168.1.8:3000/api/upload");
+        xhttp.open("post", "https://komakkharj.ir/api/upload");
 
         const formData = new FormData();
         formData.append("image", {
@@ -145,7 +145,7 @@ export default function () {
               ...perv,
               {
                 type: data.type,
-                url: `http://192.168.1.8:3000/uploads/${data.url}`,
+                url: `https://komakkharj.ir/uploads/${data.url}`,
                 isMySend: data.sender == "user" ? true : false,
               },
             ];

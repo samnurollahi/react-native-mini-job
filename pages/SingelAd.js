@@ -242,13 +242,13 @@ export default function (data) {
                   <TouchableOpacity
                     onPress={() =>
                       handelOpenImage(
-                        `http://192.168.1.8:3000/uploads/${train}`
+                        `https://komakkharj.ir/uploads/${train}`
                       )
                     }
                   >
                     <Image
                       source={{
-                        uri: `http://192.168.1.8:3000/uploads/${train}`,
+                        uri: `https://komakkharj.ir/uploads/${train}`,
                       }}
                       style={{
                         width: 50,

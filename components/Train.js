@@ -24,7 +24,7 @@ export default function({title, image, id}) {
         <View>
           <Image
             source={{
-                uri: `http://192.168.1.8:3000/uploads/${image}`
+                uri: `https://komakkharj.ir/uploads/${image}`
             }}
             style={{ width: 100, height: 100, borderRadius: 10 }}
           />

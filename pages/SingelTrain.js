@@ -38,7 +38,7 @@ export default function (props) {
 
           <Image
             source={{
-              uri: `http://192.168.1.8:3000/uploads/${train.th}`,
+              uri: `https://komakkharj.ir/uploads/${train.th}`,
             }}
             style={{
               width: "100%",
@@ -52,7 +52,7 @@ export default function (props) {
             style={{ flex: 1, marginTop: 15, direction: "rtl" }}
             originWhitelist={["*"]}
             source={{
-              uri: `http://192.168.1.8:3000/api/getContentTrain/71163a37-e1d0-4498-b533-6a273966ef43`,
+              uri: `https://komakkharj.ir/api/getContentTrain/71163a37-e1d0-4498-b533-6a273966ef43`,
             }}
           />
         </View>
