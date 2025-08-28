@@ -49,12 +49,12 @@ export default function () {
       {loaded ? (
         <>
           <View
-            style={{ direction: "rtl", display: "flex", flexDirection: "row" }}
+            style={{ flexDirection: "row-reverse", display: "flex", flexDirection: "row" }}
           >
             <Pressable
             onPress={()=>setFilterCategoryModal(true)}
               style={{
-                direction: "rtl",
+                flexDirection: "row-reverse",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
@@ -79,7 +79,7 @@ export default function () {
             <Pressable
               onPress={() => setSortModal(true)}
               style={{
-                direction: "rtl",
+                flexDirection: "row-reverse",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
@@ -103,7 +103,7 @@ export default function () {
             </Pressable>
           </View>
 
-          <View style={{ flex: 1, direction: "rtl", paddingHorizontal: 25 }}>
+          <View style={{ flex: 1, flexDirection: "row-reverse", paddingHorizontal: 25 }}>
             <FlatList
               style={{ flex: 1 }}
               data={ads}

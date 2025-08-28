@@ -11,10 +11,10 @@ export default function() {
           loop 
           autoPlay
         />
-        <Text style={{fontFamily: "vazir", textAlign: "center", width: "50%", direction: "rtl"}}>
+        <Text style={{fontFamily: "vazir", textAlign: "center", width: "50%", flexDirection: "row-reverse"}}>
           اتصال اینترنت را چک کنید، 
         </Text>
-        <Text style={{fontFamily: "vazir", textAlign: "center", width: "50%", direction: "rtl"}}>
+        <Text style={{fontFamily: "vazir", textAlign: "center", width: "50%", flexDirection: "row-reverse"}}>
           VPN را خاموش کنید
         </Text>
       </View>

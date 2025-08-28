@@ -85,7 +85,7 @@ export default function (data) {
             style={{
               fontSize: 18,
               fontFamily: "vazir",
-              direction: "rtl",
+              flexDirection: "row-reverse",
               padding: 10,
               textAlign: "center",
               backgroundColor: "#82B1FF",
@@ -101,7 +101,7 @@ export default function (data) {
 
           <View
             style={{
-              direction: "rtl",
+              flexDirection: "row-reverse",
               marginTop: 15,
               width: "95%",
               paddingHorizontal: 10,
@@ -183,7 +183,7 @@ export default function (data) {
 
           <View
             style={{
-              direction: "rtl",
+              flexDirection: "row-reverse",
               width: "95%",
               marginHorizontal: "auto",
               backgroundColor: "#fff",
@@ -221,7 +221,7 @@ export default function (data) {
               <Text
                 style={{
                   fontFamily: "vazir",
-                  direction: "ltr",
+                  flexDirection: "row-reverse",
                   textDecorationLine: "underline",
                 }}
                 onPress={() => handelPressLink(JSON.parse(ad.links))}

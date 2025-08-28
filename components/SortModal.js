@@ -17,7 +17,7 @@ export default function ({ visible, setvisible, sort, setSort }) {
           flex: 0.22,
           backgroundColor: "#fff",
           padding: 10,
-          direction: "rtl",
+          flexDirection: "row-reverse",
         }}
       >
         <Text style={{ fontSize: 17, fontFamily: "vazir", marginBottom: 15 }}>

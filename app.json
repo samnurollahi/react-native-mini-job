@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "miniJob",
-    "slug": "miniJob",
+    "name": "کمک خرج",
+    "slug": "minijob",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,13 +13,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "ExpoLocalization_supportsRTL": true
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "layoutDirection": "rtl",
       "softwareKeyboardLayoutMode": "pan",
       "edgeToEdgeEnabled": true,
       "package": "com.sam.norollahi.miniJob"
@@ -28,11 +32,13 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-localization"
     ],
     "extra": {
+      "supportsRTL": true,
       "eas": {
-        "projectId": "ddeadc5e-be3d-4df2-a3f2-be87492d1197"
+        "projectId": "a166ed76-be09-4b54-84fd-fb7f1dd941bb"
       }
     }
   }

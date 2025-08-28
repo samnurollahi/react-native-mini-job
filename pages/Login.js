@@ -36,7 +36,7 @@ export default function () {
   };
 
   return (
-    <View style={{ flex: 0.8, direction: "rtl" }}>
+    <View style={{ flex: 0.8, flexDirection: "row-reverse" }}>
       <View style={{ margin: "auto", width: "80%" }}>
       <Image
           source={require("../assets/logo.jpeg")}

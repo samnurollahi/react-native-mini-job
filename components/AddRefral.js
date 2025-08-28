@@ -44,7 +44,7 @@ export default function ({ visible, setvisible }) {
           <Text
             style={{
               fontFamily: "vazir",
-              direction: "rtl",
+              flexDirection: "row-reverse",
               fontSize: 17,
               marginBottom: 10,
             }}
@@ -67,7 +67,7 @@ export default function ({ visible, setvisible }) {
               style={{
                 fontFamily: "vazir",
                 color: "#D32F2F",
-                direction: "rtl",
+                flexDirection: "row-reverse",
               }}
             >
               کد معرف وارد شده اشتباه است

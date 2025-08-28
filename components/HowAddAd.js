@@ -26,7 +26,7 @@ export default function ({ visible, setvisible }) {
         <Text
           style={{
             fontFamily: "vazir",
-            direction: "rtl",
+            flexDirection: "row-reverse",
             fontSize: 17,
             marginTop: 10,
             marginBottom: 10,
@@ -35,7 +35,7 @@ export default function ({ visible, setvisible }) {
         >
           برای ثبت اگهی خود به ایدی زیر در تلگرام پیاد دهید
         </Text>
-          <Pressable onPress={openTelegram} style={{direction: "ltr", flexDirection: "row", alignItems: "center"}}>
+          <Pressable onPress={openTelegram} style={{flexDirection: "row-reverse", flexDirection: "row", alignItems: "center"}}>
             <FontAwesome6 name="telegram" size={24} color="#2979FF" />
             <Text style={{marginLeft: 10}}>
                 t.me/komakkharj_ad

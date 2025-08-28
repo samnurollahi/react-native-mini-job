@@ -45,7 +45,7 @@ export default function () {
               padding: 12,
               marginTop: 15,
               marginHorizontal: "auto",
-              direction: "rtl",
+              flexDirection: "row-reverse",
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
@@ -103,7 +103,7 @@ export default function () {
             }}
           >
             <Text
-              style={{ fontFamily: "vazir", fontSize: 18, direction: "rtl" }}
+              style={{ fontFamily: "vazir", fontSize: 18, flexDirection: "row-reverse" }}
             >
               زیر مجموعه ها شما
             </Text>

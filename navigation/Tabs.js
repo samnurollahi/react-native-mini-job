@@ -30,15 +30,16 @@ export default function Tabs({ token }) {
           fontSize: 18,
         },
         headerStyle: {
-          height: 65,
+          paddingBlock: 5,
+          height: 70,
           backgroundColor: "#2979FF",
         },
         animation: "shift",
         headerShadowVisible: false,
         tabBarStyle: {
-          height: 55,
+          // height: 55,
           // marginBottom: 35,
-          paddingBottom: 0,
+          // paddingBottom: 0,
           shadowColor: "white",
         },
       }}
@@ -137,14 +138,15 @@ export default function Tabs({ token }) {
           headerTitle: "حساب کاربری",
           tabBarLabel: "حساب کاربری",
           headerRight: () => (
-            <Pressable>
-              <AntDesign
-                name="setting"
-                size={24}
-                color="white"
-                style={{ paddingRight: 20, marginTop: 10 }}
-              />
-            </Pressable>
+            <></>
+            // <Pressable>
+            //   <AntDesign
+            //     name="setting"
+            //     size={24}
+            //     color="white"
+            //     style={{ paddingRight: 20, marginTop: 10 }}
+            //   />
+            // </Pressable>
           ),
         }}
       />

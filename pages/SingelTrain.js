@@ -28,7 +28,7 @@ export default function (props) {
               backgroundColor: "#fff",
               marginTop: 15,
               borderRadius: 10,
-              direction: "rtl",
+              flexDirection: "row-reverse",
               padding: 15,
               fontSize: 18,
             }}
@@ -49,7 +49,7 @@ export default function (props) {
           />
 
           <WebView
-            style={{ flex: 1, marginTop: 15, direction: "rtl" }}
+            style={{ flex: 1, marginTop: 15, flexDirection: "row-reverse" }}
             originWhitelist={["*"]}
             source={{
               uri: `https://komakkharj.ir/api/getContentTrain/71163a37-e1d0-4498-b533-6a273966ef43`,

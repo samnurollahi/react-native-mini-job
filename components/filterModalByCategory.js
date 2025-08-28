@@ -18,7 +18,7 @@ export default function ({ visible, setvisible, category, setCategory }) {
           flex: 0.22,
           backgroundColor: "#fff",
           padding: 10,
-          direction: "rtl",
+          flexDirection: "row-reverse",
         }}
       >
         <View style={{ flexDirection: "row", flexWrap: "wrap", margin: 10 }}>

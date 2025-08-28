@@ -47,7 +47,7 @@ export default function (data) {
   }
 
   return (
-    <View style={{ flex: 0.8, direction: "rtl" }}>
+    <View style={{ flex: 0.8, flexDirection: "row-reverse" }}>
       <View style={{ margin: "auto", width: "80%" }}>
         <LottieView
           source={require("../assets/anim/sms.json")}
@@ -58,7 +58,7 @@ export default function (data) {
         <Text style={{ fontSize: 16, fontFamily: "vazir", textAlign: 'center', marginTop: 10, }}>
           کد اعتبارسنجی برای شما پیامک شد
         </Text>
-        <View style={{direction: "ltr"}}>
+        <View style={{flexDirection: "row-reverse"}}>
         <OtpInput numberOfDigits={6} onTextChange={(text) => setCode(text)}  />
         </View>
         {isError ? (

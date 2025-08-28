@@ -9,7 +9,7 @@ export default function ({ title, response }) {
     <>
       <Pressable
         style={{
-          direction: "rtl",
+          flexDirection: "row-reverse",
           padding: 20,
           width: "95%",
           backgroundColor: "#fff",

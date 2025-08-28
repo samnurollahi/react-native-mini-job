@@ -1,13 +1,20 @@
 import { NavigationContainer } from "@react-navigation/native";
 import Tabs from "./navigation/Tabs";
 import Font from "./context/font";
-import { ActivityIndicator, StatusBar, ToastAndroid, BackHandler } from "react-native";
+import {
+  ActivityIndicator,
+  StatusBar,
+  ToastAndroid,
+  BackHandler,
+  I18nManager,
+} from "react-native";
 import * as Network from "expo-network";
 import OffLine from "./pages/OffLine";
 import { useEffect, useRef, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Socket from "./context/socket";
 import Service from "./service/main.service";
+import { reloadAppAsync } from "expo";
 
 export default function App() {
   // AsyncStorage.clear()
@@ -38,8 +45,14 @@ export default function App() {
   };
 
   useEffect(() => {
-    // checkVpn();
-    tokner()
+    // if (!I18nManager.isRTL) {
+    //   I18nManager.allowRTL(true);
+    //   I18nManager.forceRTL(true);
+    //   reloadAppAsync()
+    // }
+
+    checkVpn();
+    // tokner();
   }, [isConnected]);
   const navigationRef = useRef(null);
   const backAllowedScreens = ["chat", "chats"];
@@ -49,27 +62,30 @@ export default function App() {
       try {
         const state = navigationRef.current?.getRootState();
         if (!state) return false;
-  
+
         // صفحه فعلی در Tab
         let route = state.routes[state.index];
         let nestedState = route.state;
-  
+
         while (nestedState && nestedState.index !== undefined) {
           route = nestedState.routes[nestedState.index];
           nestedState = route.state;
         }
-  
+
         const currentRouteName = route.name;
-  
+
         // صفحات استثنا → Back پیش‌فرض
         if (backAllowedScreens.includes(currentRouteName)) {
           return false;
         }
-  
+
         // اگر صفحه فعلی Root هست → Confirm Exit
         if (state.index === 0) {
           const now = Date.now();
-          if (backPressTimeRef.current && now - backPressTimeRef.current < 2000) {
+          if (
+            backPressTimeRef.current &&
+            now - backPressTimeRef.current < 2000
+          ) {
             BackHandler.exitApp();
             return true;
           }
@@ -77,19 +93,20 @@ export default function App() {
           backPressTimeRef.current = now;
           return true;
         }
-  
+
         // در غیر این صورت → Back پیش‌فرض Navigation
         return false;
-  
       } catch {
         return false;
       }
     };
-  
-    const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
     return () => backHandler.remove();
   }, []);
-  
 
   return (
     <>
@@ -98,7 +115,14 @@ export default function App() {
         <Font>
           {isConnected && !vpn ? (
             token === "load" ? (
-              <ActivityIndicator size="large" style={{ flex: 1, justifyContent: "center", alignItems: "center" }} />
+              <ActivityIndicator
+                size="large"
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              />
             ) : (
               <NavigationContainer ref={navigationRef}>
                 <Tabs token={token} />
