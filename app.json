@@ -32,13 +32,11 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font",
-      "expo-localization"
+      "expo-font"
     ],
     "extra": {
-      "supportsRTL": true,
       "eas": {
-        "projectId": "a166ed76-be09-4b54-84fd-fb7f1dd941bb"
+        "projectId": "6161a069-6fd0-4d9b-86ae-e05b987ff055"
       }
     }
   }
