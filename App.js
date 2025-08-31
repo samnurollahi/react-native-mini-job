@@ -22,7 +22,6 @@ export default function App() {
   const [vpn, setVpn] = useState(false);
   const [token, setToken] = useState("load");
   const isConnected = Network.useNetworkState().isConnected;
-  const backPressTimeRef = useRef(0);
 
   const tokner = async () => {
     const token = await AsyncStorage.getItem("token");
@@ -45,17 +44,10 @@ export default function App() {
   };
 
   useEffect(() => {
-    // if (!I18nManager.isRTL) {
-    //   I18nManager.allowRTL(true);
-    //   I18nManager.forceRTL(true);
-    //   reloadAppAsync()
-    // }
 
     checkVpn();
     // tokner();
   }, [isConnected]);
-  const navigationRef = useRef(null);
-  const backAllowedScreens = ["chat", "chats"];
 
 
   return (
@@ -74,7 +66,7 @@ export default function App() {
                 }}
               />
             ) : (
-              <NavigationContainer ref={navigationRef}>
+              <NavigationContainer>
                 <Tabs token={token} />
               </NavigationContainer>
             )

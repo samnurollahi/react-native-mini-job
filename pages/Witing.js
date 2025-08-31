@@ -19,11 +19,6 @@ export default function () {
   };
 
   useEffect(() => {
-    // BackHandler.addEventListener("hardwareBackPress", () => {
-    //   navigation.canGoBack()
-
-    //   return true
-    // })
 
     navigation.addListener("focus", () => {
       setLoaded(false);

@@ -25,30 +25,11 @@ export default function Tabs({ token }) {
   const navigation = useNavigation();
   const lastPress = useRef(0);
 
-  useFocusEffect(
-    useCallback(() => {
-      const onBack = () => {
-        if (navigation.canGoBack()) {
-          navigation.goBack();
-          return true; 
-        }
-        const now = Date.now();
-        if (now - lastPress.current < 1500) {
-          BackHandler.exitApp();
-        } else {
-          ToastAndroid.show("برای خروج دوباره بزنید", ToastAndroid.SHORT);
-          lastPress.current = now;
-        }
-        return true;
-      };
 
-      const sub = BackHandler.addEventListener("hardwareBackPress", onBack);
-      return () => sub.remove();
-    }, [navigation])
-  );
 
   return (
     <Tab.Navigator
+    backBehavior="history"
       screenOptions={{
         headerTitleAlign: "center",
         headerTitleStyle: {
