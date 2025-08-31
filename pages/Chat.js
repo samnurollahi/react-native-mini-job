@@ -433,7 +433,7 @@ export default function () {
                           <View
                             key={Math.random()}
                             style={{
-                              flexDirection: "row-reverse",
+                              flexDirection: "row",
                               marginBottom: 15,
                             }}
                           >
@@ -462,7 +462,7 @@ export default function () {
                           <View
                             key={Math.random()}
                             style={{
-                              flexDirection: "row-reverse",
+                              flexDirection: "row",
                               marginBottom: 15,
                             }}
                           >
@@ -489,7 +489,7 @@ export default function () {
                         <View
                           key={chat.id}
                           style={{
-                            flexDirection: "row-reverse",
+                            flexDirection: "row",
                             marginBottom: 15,
                           }}
                         >
@@ -516,7 +516,7 @@ export default function () {
                         <View
                           key={chat.id}
                           style={{
-                            flexDirection: "row-reverse",
+                            flexDirection: "row",
                             marginBottom: 15,
                           }}
                         >

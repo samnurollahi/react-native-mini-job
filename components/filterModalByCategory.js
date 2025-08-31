@@ -18,10 +18,10 @@ export default function ({ visible, setvisible, category, setCategory }) {
           flex: 0.22,
           backgroundColor: "#fff",
           padding: 10,
-          flexDirection: "row-reverse",
+          flexDirection: "row",
         }}
       >
-        <View style={{ flexDirection: "row", flexWrap: "wrap", margin: 10 }}>
+        <View style={{ flexDirection: "row-reverse", flexWrap: "wrap", margin: 10 }}>
           <Pressable
             onPress={() => {
               setCategory((perv) => {
@@ -40,6 +40,7 @@ export default function ({ visible, setvisible, category, setCategory }) {
               backgroundColor: category.includes("phone") ? "#fff" : "#2979FF",
               borderColor: "#2979FF",
               borderWidth: 1,
+              marginHorizontal: 10,
             }}
           >
             <Text
@@ -71,6 +72,7 @@ export default function ({ visible, setvisible, category, setCategory }) {
               backgroundColor: category.includes("social") ? "#fff" : "#2979FF",
               borderColor: "#2979FF",
               borderWidth: 1,
+              marginHorizontal: 10,
             }}
           >
             <Text
@@ -105,6 +107,8 @@ export default function ({ visible, setvisible, category, setCategory }) {
                 : "#2979FF",
               borderColor: "#2979FF",
               borderWidth: 1,
+              marginHorizontal: 10,
+              marginTop: 10
             }}
           >
             <Text
@@ -138,6 +142,8 @@ export default function ({ visible, setvisible, category, setCategory }) {
                 : "#2979FF",
               borderColor: "#2979FF",
               borderWidth: 1,
+              marginHorizontal: 10,
+              marginTop: 10
             }}
           >
             <Text
@@ -172,6 +178,8 @@ export default function ({ visible, setvisible, category, setCategory }) {
                 : "#2979FF",
               borderColor: "#2979FF",
               borderWidth: 1,
+              marginHorizontal: 10,
+              marginTop: 10
             }}
           >
             <Text

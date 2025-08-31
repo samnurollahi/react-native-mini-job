@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 import Service from "../service/main.service";
 import Train from "../components/Train";
+import { useNavigation } from "@react-navigation/native";
 
 export default function () {
   const [loaded, setLoaded] = useState(false);
   const [trains, setTrains] = useState([]);
+
+  const navigate = useNavigation()
 
   const getTrain = async () => {
     const result = await Service.getTrains();
@@ -13,7 +16,9 @@ export default function () {
     setLoaded(true)
   };
   useEffect(() => {
-    getTrain();
+    navigate.addListener("focus", () => {
+      getTrain();
+    })
   }, []);
 
   return (

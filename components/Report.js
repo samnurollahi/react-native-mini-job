@@ -10,7 +10,7 @@ export default function ({title, date, status = "درحال انجام", bgStatu
       onPress={()=>navigation.navigate("chat")}
       style={{
         backgroundColor: "#fff",
-        flexDirection: "row-reverse",
+        flexDirection: "column",
         width: "95%",
         marginHorizontal: "auto",
         marginTop: 25,
@@ -23,6 +23,7 @@ export default function ({title, date, status = "درحال انجام", bgStatu
           fontFamily: "vazir",
           fontSize: 15,
           color: "#212121",
+          textAlign: "right"
         }}
       >
         {title}

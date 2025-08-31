@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  BackHandler,
   Text,
   TouchableHighlight,
   TouchableNativeFeedback,
@@ -11,11 +12,14 @@ import Service from "../service/main.service";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import * as Clipboard from "expo-clipboard";
 import LottieView from "lottie-react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function () {
   const [loaded, setLoaded] = useState(false);
   const [code, setCode] = useState("");
   const [users, setUsers] = useState([]);
+
+  const navigation = useNavigation()
 
   const getMyCode = async () => {
     const result = await Service.getMyCode();
@@ -46,19 +50,20 @@ export default function () {
               marginTop: 15,
               marginHorizontal: "auto",
               flexDirection: "row-reverse",
-              flexDirection: "row",
+              // flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
             }}
           >
             <View style={{ width: "40%" }}>
               <Text
-                style={{ fontFamily: "vazir", fontSize: 16, color: "#212121" }}
+                style={{ fontFamily: "vazir", fontSize: 16, color: "#212121", textAlign: "right" }}
               >
                 کد معرف شما
               </Text>
               <Text
                 style={{
+                  textAlign: "right",
                   fontFamily: "vazir",
                   fontSize: 13,
                   color: "#5f6368",
@@ -85,7 +90,7 @@ export default function () {
                   }}
                 >
                   <FontAwesome5 name="copy" size={13} color="black" />
-                  {"  " + code}
+                    {" " + code}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -103,7 +108,7 @@ export default function () {
             }}
           >
             <Text
-              style={{ fontFamily: "vazir", fontSize: 18, flexDirection: "row-reverse" }}
+              style={{ fontFamily: "vazir", fontSize: 18, flexDirection: "row-reverse", textAlign: "right" }}
             >
               زیر مجموعه ها شما
             </Text>

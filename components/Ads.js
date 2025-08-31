@@ -29,14 +29,14 @@ export default function ({ title, price, categorys, id}) {
         marginTop: 5,
       }}
     >
-      <Text style={{ color: "#212121", fontFamily: "vazir", fontSize: 16 }}>
+      <Text style={{ color: "#212121", fontFamily: "vazir", fontSize: 16, textAlign: "right" }}>
         {title}
       </Text>
 
       <View
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "row-reverse",
           alignItems: "center",
           marginTop: 15,
         }}
@@ -48,7 +48,7 @@ export default function ({ title, price, categorys, id}) {
       </View>
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: "row-reverse",
           flexWrap: "wrap",
           alignItems: "center",
           marginTop: 15,

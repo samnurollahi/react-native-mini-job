@@ -85,7 +85,7 @@ export default function (data) {
             style={{
               fontSize: 18,
               fontFamily: "vazir",
-              flexDirection: "row-reverse",
+              flexDirection: "row",
               padding: 10,
               textAlign: "center",
               backgroundColor: "#82B1FF",
@@ -101,7 +101,7 @@ export default function (data) {
 
           <View
             style={{
-              flexDirection: "row-reverse",
+              flexDirection: "row",
               marginTop: 15,
               width: "95%",
               paddingHorizontal: 10,
@@ -118,7 +118,7 @@ export default function (data) {
               <View
                 style={{
                   marginBottom: 10,
-                  flexDirection: "row-reverse",
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "flex-end",
                 }}
@@ -131,7 +131,7 @@ export default function (data) {
               <View
                 style={{
                   marginBottom: 10,
-                  flexDirection: "row-reverse",
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "flex-end",
                 }}
@@ -146,7 +146,7 @@ export default function (data) {
               <View
                 style={{
                   marginBottom: 10,
-                  flexDirection: "row-reverse",
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "flex-end",
                 }}
@@ -158,7 +158,7 @@ export default function (data) {
               <View
                 style={{
                   marginBottom: 10,
-                  flexDirection: "row-reverse",
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "flex-end",
                 }}
@@ -170,7 +170,7 @@ export default function (data) {
               <View
                 style={{
                   marginBottom: 10,
-                  flexDirection: "row-reverse",
+                  flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "flex-end",
                 }}
@@ -183,7 +183,7 @@ export default function (data) {
 
           <View
             style={{
-              flexDirection: "row-reverse",
+              flexDirection: "column",
               width: "95%",
               marginHorizontal: "auto",
               backgroundColor: "#fff",
@@ -192,36 +192,36 @@ export default function (data) {
               padding: 10,
             }}
           >
-            <View>
+            <View style={{flexDirection: "column"}}>
               <Text
-                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17 }}
+                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17, textAlign: "right" }}
               >
                 توضیحات
               </Text>
-              <Text style={{ fontFamily: "vazir" }}>{ad.des}</Text>
+              <Text style={{ fontFamily: "vazir", textAlign: "right" }}>{ad.des}</Text>
             </View>
 
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 15, flexDirection: "column" }}>
               <Text
-                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17 }}
+                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17, textAlign: "right" }}
               >
                 شرایط تایید
               </Text>
-              <Text style={{ fontFamily: "vazir" }}>
+              <Text style={{ fontFamily: "vazir", textAlign: "right" }}>
                 {ad.sharayedAcceptWithAdmin}
               </Text>
             </View>
 
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 15, flexDirection: "column" }}>
               <Text
-                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17 }}
+                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17, textAlign: "right" }}
               >
                 لینک
               </Text>
               <Text
                 style={{
                   fontFamily: "vazir",
-                  flexDirection: "row-reverse",
+                  flexDirection: "row",
                   textDecorationLine: "underline",
                 }}
                 onPress={() => handelPressLink(JSON.parse(ad.links))}
@@ -230,9 +230,9 @@ export default function (data) {
               </Text>
             </View>
 
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 15, flexDirection: "column" }}>
               <Text
-                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17 }}
+                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17, textAlign: "right" }}
               >
                 تصاویر راهنما
               </Text>
@@ -262,15 +262,15 @@ export default function (data) {
               </View>
             </View>
 
-            <View style={{ marginTop: 15 }}>
+            <View style={{ marginTop: 15, }}>
               <Text
-                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17 }}
+                style={{ color: "#2979FF", fontFamily: "vazir", fontSize: 17, textAlign: "right" }}
               >
                 برچسب
               </Text>
               <View
                 style={{
-                  flexDirection: "row",
+                  flexDirection: "row-reverse",
                   justifyContent: "flex-start",
                   marginTop: 10,
                   flexWrap: "wrap",
@@ -294,28 +294,12 @@ export default function (data) {
                     >
                       {categoryName(item)}
                     </Text>
-                    <Text
-                      style={{
-                        marginLeft: 15,
-                        backgroundColor: "#2979FF",
-                        color: "#fff",
-                        borderRadius: 20,
-                        paddingVertical: 5,
-                        paddingHorizontal: 10,
-                        fontSize: 13,
-                        marginBottom: 10,
-                        fontFamily: "vazir",
-                      }}
-                      key={Math.random()}
-                    >
-                      {categoryName(item)}
-                    </Text>
                   </>
                 ))}
               </View>
             </View>
           </View>
-          <View>
+          <View style={{marginTop: 10, width: "95%", marginHorizontal: "auto"}}>
             <Button title="انجام میدم" onPress={anjamMidam} />
           </View>
 

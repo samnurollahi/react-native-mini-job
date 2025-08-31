@@ -95,7 +95,6 @@ export default (props) => {
     <>
       {loaded ? (
         <>
-          {" "}
           <View
             style={{
               backgroundColor: "#1565C0",
@@ -237,6 +236,46 @@ export default (props) => {
                   style={{ fontFamily: "vazir", marginRight: 10, fontSize: 16 }}
                 >
                   برداشت
+                </Text>
+              </View>
+              <AntDesign name="arrowleft" size={23} color="#333" />
+            </TouchableOpacity>
+            <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("history")
+            }}
+              style={{
+                width: "95%",
+                marginHorizontal: "auto",
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "space-between",
+                flexDirection: "row-reverse",
+                padding: 20,
+                borderRadius: 14,
+                // outlineWidth: 2,
+                // outlineOffset: 0,
+                // outlineColor: "#388E3C",
+                boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                marginTop: 20,
+              }}
+            >
+              <View
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "row-reverse",
+                }}
+              >
+                <FontAwesome5
+                  name="history"
+                  size={24}
+                  color="#5f6368"
+                />
+                <Text
+                  style={{ fontFamily: "vazir", marginRight: 10, fontSize: 16 }}
+                >
+                  سوابق برداشت
                 </Text>
               </View>
               <AntDesign name="arrowleft" size={23} color="#333" />

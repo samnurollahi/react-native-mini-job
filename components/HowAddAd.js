@@ -27,6 +27,7 @@ export default function ({ visible, setvisible }) {
           style={{
             fontFamily: "vazir",
             flexDirection: "row-reverse",
+            textAlign: "right",
             fontSize: 17,
             marginTop: 10,
             marginBottom: 10,

@@ -12,7 +12,7 @@ import { useCallback, useEffect, useState } from "react";
 import Ads from "../components/Ads";
 import Service from "../service/main.service";
 import SortModal from "../components/SortModal";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FilterModalByCategory from "../components/filterModalByCategory";
 
 export default function () {
@@ -22,6 +22,8 @@ export default function () {
   const [sort, setSort] = useState("DESC");
   const [filterCategoryModal, setFilterCategoryModal] = useState(false);
   const [category, setCategory] = useState([]);
+
+  const navigation = useNavigation()
 
   const getData = async (sort, caregory) => {
     const data = await Service.getAds(sort, caregory);
@@ -40,16 +42,19 @@ export default function () {
   };
 
   useEffect(() => {
+    navigation.addListener("focus", () => {
+      setLoaded(false);
+      getData(sort, category);
+    })
     setLoaded(false);
     getData(sort, category);
-    console.log(category);
   }, [sort, category]);
   return (
     <>
       {loaded ? (
         <>
           <View
-            style={{ flexDirection: "row-reverse", display: "flex", flexDirection: "row" }}
+            style={{ flexDirection: "row-reverse" }}
           >
             <Pressable
             onPress={()=>setFilterCategoryModal(true)}

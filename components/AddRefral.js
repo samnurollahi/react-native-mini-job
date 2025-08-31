@@ -45,8 +45,10 @@ export default function ({ visible, setvisible }) {
             style={{
               fontFamily: "vazir",
               flexDirection: "row-reverse",
+              textAlign: "right",
+              marginTop: 10,
               fontSize: 17,
-              marginBottom: 10,
+              marginBottom: 17,
             }}
           >
             کد معرف را وارد کنید

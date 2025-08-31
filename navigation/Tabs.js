@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { BackHandler, Pressable, ToastAndroid } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -16,9 +16,36 @@ import SingelAd from "../pages/SingelAd";
 import Chat from "../pages/Chat";
 import SingelTrain from "../pages/SingelTrain";
 import ZirMajmoe from "../pages/ZirMajmoe";
+import History from "../pages/History";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useCallback, useRef } from "react";
 
 const Tab = createBottomTabNavigator();
 export default function Tabs({ token }) {
+  const navigation = useNavigation();
+  const lastPress = useRef(0);
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBack = () => {
+        if (navigation.canGoBack()) {
+          navigation.goBack();
+          return true; 
+        }
+        const now = Date.now();
+        if (now - lastPress.current < 1500) {
+          BackHandler.exitApp();
+        } else {
+          ToastAndroid.show("برای خروج دوباره بزنید", ToastAndroid.SHORT);
+          lastPress.current = now;
+        }
+        return true;
+      };
+
+      const sub = BackHandler.addEventListener("hardwareBackPress", onBack);
+      return () => sub.remove();
+    }, [navigation])
+  );
 
   return (
     <Tab.Navigator
@@ -30,7 +57,7 @@ export default function Tabs({ token }) {
           fontSize: 18,
         },
         headerStyle: {
-          paddingBlock: 5,
+          // paddingBlock: 5,
           height: 70,
           backgroundColor: "#2979FF",
         },
@@ -211,6 +238,19 @@ export default function Tabs({ token }) {
         component={ZirMajmoe}
         options={{
           headerTitle: "زیر مجموعه گیری",
+          tabBarItemStyle: {
+            display: "none"
+          },
+          tabBarStyle: {
+            display: "none"
+          }
+        }}
+      />
+      <Tab.Screen
+        name="history"
+        component={History}
+        options={{
+          headerTitle: "سوابق برداشت",
           tabBarItemStyle: {
             display: "none"
           },

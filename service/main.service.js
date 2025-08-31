@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://komakkharj.ir/api",
+  baseURL: "http://192.168.1.3:3000/api",
 });
 
 export default class mainServer {
@@ -180,13 +180,25 @@ export default class mainServer {
     }
   }
 
-  static async requestToIncome(count) {
+  static async requestToIncome(count, cartNumber, type) {
     try {
       const token = await AsyncStorage.getItem("token")
       const result = await client.post(`/sendRequestIncome/${token}`, {
-        count
+        count,
+        cartNumber,
+        type,
       })
       return result.data
+    } catch (err) {
+        console.log(err);
+    }
+  }
+
+  static async getHistory() {
+    try {
+      const token = await AsyncStorage.getItem("token")
+      const respone = await client.get(`/getHistoryUser/${token}`)
+      return respone.data
     } catch (err) {
         console.log(err);
     }

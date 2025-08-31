@@ -42,7 +42,7 @@ export default function () {
           source={require("../assets/logo.jpeg")}
           style={{ marginHorizontal: "auto" }}
         />
-        <Text style={{ fontSize: 16, fontFamily: "vazir" }}>شماره موبایل</Text>
+        <Text style={{ fontSize: 16, fontFamily: "vazir", textAlign: "right" }}>شماره موبایل</Text>
         <TextInput
           placeholder="09123...."
           style={{
