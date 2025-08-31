@@ -16,7 +16,7 @@ export default function (props) {
 
   useEffect(() => {
     getSingelTrain();
-  }, []);
+  }, [props]);
 
   return (
     <>
@@ -31,6 +31,7 @@ export default function (props) {
               flexDirection: "row-reverse",
               padding: 15,
               fontSize: 18,
+              textAlign: "right"
             }}
           >
             {train.title}
@@ -52,7 +53,7 @@ export default function (props) {
             style={{ flex: 1, marginTop: 15, flexDirection: "row-reverse" }}
             originWhitelist={["*"]}
             source={{
-              uri: `https://komakkharj.ir/api/getContentTrain/71163a37-e1d0-4498-b533-6a273966ef43`,
+              uri: `https://komakkharj.ir/api/getContentTrain/${train.id}`,
             }}
           />
         </View>
