@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import { BackHandler, Button, Image, Text, TextInput, View } from "react-native";
 import Service from "../service/main.service";
-import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Entypo from "@expo/vector-icons/Entypo";
+
 
 export default function () {
   const [phoneNumberText, setPhoneNumberText] = useState();
@@ -36,7 +37,8 @@ export default function () {
   };
 
   return (
-    <View style={{ flex: 0.8, flexDirection: "row-reverse" }}>
+    <View style={{backgroundColor: "#fff", flex: 1}}>
+    <View style={{ flex: 0.8, flexDirection: "row-reverse", }}>
       <View style={{ margin: "auto", width: "80%" }}>
       <Image
           source={require("../assets/logo.jpeg")}
@@ -68,7 +70,15 @@ export default function () {
         <View style={{ marginTop: 10 }}>
           <Button title="ارسال پیامک" onPress={submit} />
         </View>
+
+        <View style={{flexDirection: "row-reverse", alignItems: "center"}}>
+        <Entypo name="info" size={18} color="black" />
+        <Text style={{fontFamily: "vazir", margin: 10, textAlign: "right"}}>
+        لطفا پیش از شروع کار حتما در قسمت آموزش ویدیو راهنمای کار با برنامه را ببینید 
+        </Text>
+        </View>
       </View>
+    </View>
     </View>
   );
 }

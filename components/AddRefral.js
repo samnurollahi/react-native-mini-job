@@ -29,15 +29,15 @@ export default function ({ visible, setvisible }) {
     <Modal visible={visible} transparent={true} animationType="fade">
       <Pressable
         ref={shadow}
-        style={{ flex: 0.8, backgroundColor: "#000", opacity: 0.7 }}
+        style={{ flex: 0.5, backgroundColor: "#000", opacity: 0.7 }}
         onPress={() => setvisible(false)}
       ></Pressable>
       <View
         style={{
-          flex: 0.2,
+          flex: 0.5,
           backgroundColor: "#fff",
           padding: 10,
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
         }}
       >
         <View>

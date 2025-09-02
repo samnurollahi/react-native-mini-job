@@ -63,7 +63,7 @@ export default function (data) {
       }
     });
     socket.on("goToChatRoom", () => {
-      navigation.navigate("chat")
+      navigation.navigate("chat", {adId: ad.id})
     })
     } catch (err) {
       console.log(err);

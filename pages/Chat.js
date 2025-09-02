@@ -19,9 +19,8 @@ import Service from "../service/main.service";
 import { useNavigation } from "@react-navigation/native";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 import ImageViewing from "react-native-image-viewing";
-import { jsx } from "react/jsx-runtime";
 
-export default function () {
+export default function (props) {
   const [loaded, setLoaded] = useState(false);
   const [text, setText] = useState("");
   const [chats, setChats] = useState([]);
@@ -51,7 +50,7 @@ export default function () {
     }
   };
   const getMessage = async () => {
-    const messages = await Service.getMessages();
+    const messages = await Service.getMessages(props.route.params.adId);
 
     let array = [];
     let obj = {};
@@ -133,7 +132,6 @@ export default function () {
     navi.addListener("focus", () => {
       setLoaded(false);
       getMessage();
-      console.log("focos");
       socket.on("chatUser", async (data) => {
         scrollRef.current.scrollToEnd({ animated: false });
         if (data.type == "image") {
@@ -172,7 +170,6 @@ export default function () {
       });
     });
     navi.addListener("blur", () => {
-      console.log("blur");
       socket.off("chatUser");
       socket.off("userReloadView");
     });

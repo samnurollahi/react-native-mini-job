@@ -1,3 +1,4 @@
+import Entypo from "@expo/vector-icons/Entypo";
 import { useRef, useState } from "react";
 import {
   Button,
@@ -21,10 +22,18 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
   const shadow = useRef(null);
 
   const validation = () => {
-    if (cartNumber.length == 16) {
-      setBtnDisabel(false);
+    if (+income > 50_000) {
+      if (cartNumber.length == 24) {
+        setBtnDisabel(false);
+      } else {
+        setBtnDisabel(true);
+      }
     } else {
-      setBtnDisabel(true);
+      if (cartNumber.length == 11) {
+        setBtnDisabel(false);
+      } else {
+        setBtnDisabel(true);
+      }
     }
   };
   const preSubmit = () => {
@@ -32,12 +41,8 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
   };
   const submit = async () => {
     try {
-      const type = +income > 50_000 ? "cart" : "simcart"
-      const result = await Service.requestToIncome(
-        count,
-        cartNumber,
-        type
-      );
+      const type = +income > 50_000 ? "cart" : "simcart";
+      const result = await Service.requestToIncome(count, cartNumber, type);
       setIncomeCount(result.price);
       setvisible(false);
     } catch (err) {
@@ -98,7 +103,7 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
               }}
               keyboardType="number-pad"
               placeholder="شماره شبا را بدون IR وارد کنید"
-              maxLength={16}
+              maxLength={24}
               value={cartNumber}
               onChangeText={(text) => {
                 setCartNumber(text);
@@ -153,6 +158,32 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
           <View style={{ marginTop: 20 }}>
             <Button title="ثبت" disabled={btnDisabel} onPress={preSubmit} />
           </View>
+
+          {+income > 50_000 ? (
+            <View style={{flexDirection: "row-reverse", alignItems: "center", marginTop: 20}}>
+              <Entypo name="info" size={24} color="black" />
+              <Text
+                style={{
+                  fontFamily: "vazir",
+                  textAlign: "right",
+                }}
+              >
+                روند واریز وجه تا 72 ساعت کاری انجام میشود
+              </Text>
+            </View>
+          ) : (
+            <View style={{flexDirection: "row-reverse", alignItems: "center", marginTop: 20}}>
+              <Entypo name="info" size={24} color="black" />
+              <Text
+                style={{
+                  fontFamily: "vazir",
+                  textAlign: "right",
+                }}
+              >
+                روند ارسال شارژ موبایل در 24 ساعت کاری انجام میشود
+              </Text>
+            </View>
+          )}
         </View>
       </Modal>
 
@@ -187,15 +218,23 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
 
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: 60 }}>
-              <Button title="بله" color={"#388E3C"} onPress={() => {
-                setIsVisibelPreSubmit(false)
-                submit()
-              }}/>
+              <Button
+                title="بله"
+                color={"#388E3C"}
+                onPress={() => {
+                  setIsVisibelPreSubmit(false);
+                  submit();
+                }}
+              />
             </View>
             <View style={{ width: 60, marginLeft: 25 }}>
-              <Button title="خیر" color={"#D32F2F"} onPress={() => {
-                setIsVisibelPreSubmit(false)
-              }}/>
+              <Button
+                title="خیر"
+                color={"#D32F2F"}
+                onPress={() => {
+                  setIsVisibelPreSubmit(false);
+                }}
+              />
             </View>
           </View>
         </View>

@@ -10,7 +10,7 @@ export default function({children}) {
 
 
     useEffect(() => {
-        const newSocket = io("https://komakkharj.ir")
+        const newSocket = io("http://192.168.1.3:3000")
 
         newSocket.on("connect", async () => {
             console.log("connect");

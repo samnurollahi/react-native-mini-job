@@ -32,12 +32,14 @@ export default function () {
   };
   const renderItem = async ({ item }) => {
     return (
+      <>
       <Ads
         title={item.title}
         price={item.price}
         categorys={JSON.parse(item.caregory)}
         id={item.id}
       />
+      </>
     );
   };
 

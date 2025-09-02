@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import Service from "../service/main.service";
-import { ActivityIndicator, BackHandler } from "react-native";
+import { ActivityIndicator, BackHandler, ScrollView } from "react-native";
 import { View } from "react-native-animatable";
 import Report from "../components/Report";
 import PaydaNashod from "../components/PaydaNashod";
@@ -19,26 +19,28 @@ export default function () {
   };
 
   useEffect(() => {
-
     navigation.addListener("focus", () => {
       setLoaded(false);
       getMyWiting();
     });
   }, []);
-  return <>
-    {
-        loaded ? <>
-
-            {
-              ads.length > 0 ?             
-                ads.map(ad => (
-                  <Report title={ad.msg} date={ad.createdAt} key={ad.id} />
-                ))
-              : <PaydaNashod />
-            }
-
-
-        </> : <ActivityIndicator size={"large"} style={{margin: "auto"}} />
-    }
-  </>;
+  return (
+    <>
+      {loaded ? (
+        <>
+          {ads.length > 0 ? (
+            <ScrollView>
+              {ads.map((ad) => (
+                <Report title={ad.msg} date={ad.createdAt} key={ad.id} adId={ad.id} />
+              ))}
+            </ScrollView>
+          ) : (
+            <PaydaNashod />
+          )}
+        </>
+      ) : (
+        <ActivityIndicator size={"large"} style={{ margin: "auto" }} />
+      )}
+    </>
+  );
 }

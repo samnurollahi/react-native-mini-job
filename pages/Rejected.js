@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import Service from "../service/main.service";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
 import { View } from "react-native-animatable";
 import Report from "../components/Report";
 import PaydaNashod from "../components/PaydaNashod";
@@ -29,15 +29,18 @@ export default function () {
       {loaded ? (
         <>
           {ads.length > 0 ? (
-            ads.map((ad) => (
-              <Report
-                title={ad.msg}
-                date={ad.createdAt}
-                key={ad.id}
-                status="رد شده"
-                bgStatus="#D32F2F"
-              />
-            ))
+            <ScrollView>
+              {ads.map((ad) => (
+                <Report
+                  title={ad.msg}
+                  date={ad.createdAt}
+                  key={ad.id}
+                  status="رد شده"
+                  bgStatus="#D32F2F"
+                  adId={ad.id}
+                />
+              ))}
+            </ScrollView>
           ) : (
             <PaydaNashod />
           )}

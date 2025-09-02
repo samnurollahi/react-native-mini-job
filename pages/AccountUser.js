@@ -1,4 +1,4 @@
-import { ActivityIndicator, Text, TouchableOpacity, View, ToastAndroid, BackHandler } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View, ToastAndroid, BackHandler, ScrollView } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -161,6 +161,7 @@ export default (props) => {
             />
           </View>
           <View style={{ marginTop: 20 }}>
+            <ScrollView>
             {isRefral ? (
               <></>
             ) : (
@@ -407,6 +408,7 @@ export default (props) => {
               </View>
               <AntDesign name="arrowleft" size={23} color="#333" />
             </TouchableOpacity>
+            </ScrollView>
           </View>
           <HowAddAd
             setvisible={setVisibleHowToAddAd}

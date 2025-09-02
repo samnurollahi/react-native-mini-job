@@ -2,26 +2,24 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://komakkharj.ir/api",
+  baseURL: "http://192.168.1.3:3000/api",
 });
 
 export default class mainServer {
   static async checkVpn() {
     try {
-      const result = await client.get("/checkVpn")
-      return result.data
+      const result = await client.get("/checkVpn");
+      return result.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
-
 
   static async sendCodeToLogin(phoneNumber) {
     try {
       const result = await client.post("/sendCodeToPhoneNumber", {
         phoneNumber,
       });
-
       return result;
     } catch (err) {
       console.log(err);
@@ -43,8 +41,11 @@ export default class mainServer {
 
   static async getAds(sort = "DESC", category = []) {
     try {
+      const token = await AsyncStorage.getItem("token");
       const result = await client.get(
-        `/getAds?sort=${sort}&category=${JSON.stringify(category)}`
+        `/getAds?sort=${sort}&category=${JSON.stringify(
+          category
+        )}&token=${token}`
       );
       return result.data;
     } catch (err) {
@@ -70,10 +71,10 @@ export default class mainServer {
     }
   }
 
-  static async getMessages() {
+  static async getMessages(adId) {
     try {
+      console.log(adId);
       const token = await AsyncStorage.getItem("token");
-
       const result = await client.get(`/getMessages/${token}`);
       return result.data;
     } catch (err) {
@@ -133,74 +134,74 @@ export default class mainServer {
 
   static async getMyZirMajmoe(myCode) {
     try {
-      const result = await client.get(`/getMyZirMajmoe/${myCode}`)
-      return result.data
+      const result = await client.get(`/getMyZirMajmoe/${myCode}`);
+      return result.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
 
   static async getMyWiting() {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const result = await client.get(`/getMyWiting/${token}`)
-      return result.data
-    } catch (err) { 
+      const token = await AsyncStorage.getItem("token");
+      const result = await client.get(`/getMyWiting/${token}`);
+      return result.data;
+    } catch (err) {
       console.log(err);
     }
-  } 
+  }
 
   static async getMyAccepted() {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const result = await client.get(`/getMyAccepted/${token}`)
-      return result.data
+      const token = await AsyncStorage.getItem("token");
+      const result = await client.get(`/getMyAccepted/${token}`);
+      return result.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
 
   static async getMyRejected() {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const result = await client.get(`/getMyRejected/${token}`)
-      return result.data
+      const token = await AsyncStorage.getItem("token");
+      const result = await client.get(`/getMyRejected/${token}`);
+      return result.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
 
   static async getIncome() {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const result = await client.get(`/getIncome/${token}`)
-      return result.data
+      const token = await AsyncStorage.getItem("token");
+      const result = await client.get(`/getIncome/${token}`);
+      return result.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
 
   static async requestToIncome(count, cartNumber, type) {
     try {
-      const token = await AsyncStorage.getItem("token")
+      const token = await AsyncStorage.getItem("token");
       const result = await client.post(`/sendRequestIncome/${token}`, {
         count,
         cartNumber,
         type,
-      })
-      return result.data
+      });
+      return result.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
 
   static async getHistory() {
     try {
-      const token = await AsyncStorage.getItem("token")
-      const respone = await client.get(`/getHistoryUser/${token}`)
-      return respone.data
+      const token = await AsyncStorage.getItem("token");
+      const respone = await client.get(`/getHistoryUser/${token}`);
+      return respone.data;
     } catch (err) {
-        console.log(err);
+      console.log(err);
     }
   }
 }

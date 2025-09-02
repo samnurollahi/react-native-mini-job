@@ -2,12 +2,12 @@ import { Text, TouchableOpacity, View } from "react-native";
 import handelDate from "../utils/handelDate";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ({title, date, status = "درحال انجام", bgStatus = "#ffc107"}) {
+export default function ({title, date, status = "درحال انجام", bgStatus = "#ffc107", adId}) {
     const navigation = useNavigation()
   
   return (
     <TouchableOpacity
-      onPress={()=>navigation.navigate("chat")}
+      onPress={()=>navigation.navigate("chat", {adId})}
       style={{
         backgroundColor: "#fff",
         flexDirection: "column",
