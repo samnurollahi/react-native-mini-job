@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "http://192.168.1.3:3000/api",
+  baseURL: "https://komakkharj.ir/api",
 });
 
 export default class mainServer {
@@ -73,9 +73,9 @@ export default class mainServer {
 
   static async getMessages(adId) {
     try {
-      console.log(adId);
+      console.log("id sended to server is has:", adId);
       const token = await AsyncStorage.getItem("token");
-      const result = await client.get(`/getMessages/${token}`);
+      const result = await client.get(`/getMessages/${token}/${adId}`);
       return result.data;
     } catch (err) {
       console.log(err);

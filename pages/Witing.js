@@ -31,7 +31,7 @@ export default function () {
           {ads.length > 0 ? (
             <ScrollView>
               {ads.map((ad) => (
-                <Report title={ad.msg} date={ad.createdAt} key={ad.id} adId={ad.id} />
+                <Report title={ad.msg} date={ad.createdAt} key={ad.id} adId={ad.adId} />
               ))}
             </ScrollView>
           ) : (

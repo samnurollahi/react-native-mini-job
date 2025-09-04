@@ -1,5 +1,5 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -16,7 +16,7 @@ import { useSocket } from "../context/socket";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Animatable from "react-native-animatable";
 import Service from "../service/main.service";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 import ImageViewing from "react-native-image-viewing";
 
@@ -27,6 +27,7 @@ export default function (props) {
   const [indexLastChat, setIndexLastChat] = useState();
   const [imageVisibel, setImageVisibel] = useState(false);
   const [imageVisit, setImageVisit] = useState("");
+  const [adIdChat, setAdIdChat] = useState()
 
   const scrollRef = useRef(null);
 
@@ -39,6 +40,7 @@ export default function (props) {
         chat: text,
         sender: "user",
         token: await AsyncStorage.getItem("token"),
+        adId: adIdChat
       });
 
       // scrollRef.current.scrollToEnd({animated: true})
@@ -49,8 +51,8 @@ export default function (props) {
       setText("");
     }
   };
-  const getMessage = async () => {
-    const messages = await Service.getMessages(props.route.params.adId);
+  const getMessage = async (adIdChatForGet) => {
+    const messages = await Service.getMessages(adIdChatForGet);
 
     let array = [];
     let obj = {};
@@ -112,6 +114,7 @@ export default function (props) {
             token: await AsyncStorage.getItem("token"),
             type: "image",
             url: response.filename,
+            adId: adIdChat
           });
         };
 
@@ -129,9 +132,21 @@ export default function (props) {
   };
 
   useEffect(() => {
-    navi.addListener("focus", () => {
+
+    navi.addListener("blur", () => {
+      socket.off("chatUser");
+      socket.off("userReloadView");
+    });
+  }, []);
+
+  useFocusEffect(useCallback(() => {
+    if(props.route.params) {
+      console.log(props.route.params.adId);
+      setAdIdChat(props.route.params.adId)
+    }
+    // navi.addListener("focus", () => {
       setLoaded(false);
-      getMessage();
+      getMessage(props.route.params.adId);
       socket.on("chatUser", async (data) => {
         scrollRef.current.scrollToEnd({ animated: false });
         if (data.type == "image") {
@@ -168,12 +183,10 @@ export default function (props) {
         console.log("user reload");
         getMessage();
       });
-    });
-    navi.addListener("blur", () => {
-      socket.off("chatUser");
-      socket.off("userReloadView");
-    });
-  }, []);
+    // });
+
+  }, [props.route.params]))
+
 
   return (
     <>

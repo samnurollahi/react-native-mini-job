@@ -37,7 +37,7 @@ export default function () {
                   key={ad.id}
                   status="رد شده"
                   bgStatus="#D32F2F"
-                  adId={ad.id}
+                  adId={ad.adId}
                 />
               ))}
             </ScrollView>

@@ -282,7 +282,7 @@ export default (props) => {
               <AntDesign name="arrowleft" size={23} color="#333" />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate("chat")}
+              onPress={() => navigation.navigate("chat", {adId: "sup"})}
               style={{
                 width: "95%",
                 marginHorizontal: "auto",

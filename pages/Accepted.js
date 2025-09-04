@@ -33,7 +33,7 @@ export default function () {
               <ScrollView>
                 {
                   ads.map(ad => (
-                    <Report title={ad.msg} date={ad.createdAt} key={ad.id}  adId={ad.id} status="تایید شده" bgStatus="#388E3C" />
+                    <Report title={ad.msg} date={ad.createdAt} key={ad.id}  adId={ad.adId} status="تایید شده" bgStatus="#388E3C" />
                   ))
                 }          
               </ScrollView>

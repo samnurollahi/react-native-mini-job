@@ -40,6 +40,9 @@ export default function () {
     <View style={{backgroundColor: "#fff", flex: 1}}>
     <View style={{ flex: 0.8, flexDirection: "row-reverse", }}>
       <View style={{ margin: "auto", width: "80%" }}>
+        <Text style={{fontFamily: "vazir", textAlign: "center"}}>
+        کمک خرج ، کسب درآمد آسان در منزل
+        </Text>
       <Image
           source={require("../assets/logo.jpeg")}
           style={{ marginHorizontal: "auto" }}
