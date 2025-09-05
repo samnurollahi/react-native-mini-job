@@ -4,17 +4,13 @@ import Font from "./context/font";
 import {
   ActivityIndicator,
   StatusBar,
-  ToastAndroid,
-  BackHandler,
-  I18nManager,
 } from "react-native";
 import * as Network from "expo-network";
 import OffLine from "./pages/OffLine";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Socket from "./context/socket";
 import Service from "./service/main.service";
-import { reloadAppAsync } from "expo";
 
 export default function App() {
   // AsyncStorage.clear()

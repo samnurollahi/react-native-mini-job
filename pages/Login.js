@@ -45,7 +45,7 @@ export default function () {
         </Text>
       <Image
           source={require("../assets/logo.jpeg")}
-          style={{ marginHorizontal: "auto" }}
+          style={{ marginHorizontal: "auto", width: 190, height: 170 }}
         />
         <Text style={{ fontSize: 16, fontFamily: "vazir", textAlign: "right" }}>شماره موبایل</Text>
         <TextInput
