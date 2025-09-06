@@ -17,13 +17,13 @@ export default function ({ visible, setvisible, sort, setSort }) {
           flex: 0.22,
           backgroundColor: "#fff",
           padding: 10,
-          flexDirection: "reverse",
+          flexDirection: "column",
         }}
       >
-        <Text style={{ fontSize: 17, fontFamily: "vazir", marginBottom: 15 }}>
+        <Text style={{ fontSize: 17, fontFamily: "vazir", marginBottom: 15, textAlign: "right" }}>
           مرتب سازی بر اساس
         </Text>
-        <View style={{ flexDirection: "row", flexWrap: "wrap", margin: 10 }}>
+        <View style={{ flexDirection: "row-reverse", flexWrap: "wrap", margin: 10 }}>
           <Pressable
             onPress={() => {
               setSort("PDESC");

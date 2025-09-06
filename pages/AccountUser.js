@@ -390,6 +390,7 @@ export default (props) => {
                 padding: 20,
                 borderRadius: 14,
                 marginTop: 20,
+                marginBottom: 500
               }}
             >
               <View

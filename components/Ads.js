@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import categoryName from "../utils/categoryName";
 import { useNavigation } from "@react-navigation/native";
 
-export default function ({ title, price, categorys, id}) {
+export default function ({ title, price, categorys, id, mode}) {
   const anim = useRef(null)
   const navi = useNavigation()
 
@@ -24,7 +24,7 @@ export default function ({ title, price, categorys, id}) {
         padding: 20,
         borderRadius: 15,
         borderWidth: 5,
-        borderColor: "#2979FF",
+        borderColor: mode != "عادی" ? "#2979FF" : "#fff",
         marginBottom: 20,
         marginTop: 5,
       }}

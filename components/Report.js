@@ -7,7 +7,12 @@ export default function ({title, date, status = "درحال انجام", bgStatu
   
   return (
     <TouchableOpacity
-      onPress={()=>navigation.navigate("chat", {adId})}
+      onPress={()=>
+      {
+        if(status == "درحال انجام") {
+          navigation.navigate("chat", {adId})}
+        }
+      }
       style={{
         backgroundColor: "#fff",
         flexDirection: "column",

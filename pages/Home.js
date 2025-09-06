@@ -34,6 +34,7 @@ export default function () {
     return (
       <>
       <Ads
+      mode={item.mode}
         title={item.title}
         price={item.price}
         categorys={JSON.parse(item.caregory)}
@@ -132,6 +133,7 @@ export default function () {
             setvisible={setFilterCategoryModal}
             category={category}
             setCategory={setCategory}
+            setSort={setSort}
           />
         </>
       ) : (

@@ -1,28 +1,36 @@
 import { useRef, useState } from "react";
-import { Modal, Pressable, Text, View } from "react-native";
+import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import categoryName from "../utils/categoryName";
 
-export default function ({ visible, setvisible, category, setCategory }) {
+export default function ({
+  visible,
+  setvisible,
+  category,
+  setCategory,
+  setSort,
+}) {
   const shadow = useRef(null);
 
   return (
     <Modal visible={visible} transparent={true} animationType="fade">
       <Pressable
         ref={shadow}
-        style={{ flex: 0.78, backgroundColor: "#000", opacity: 0.7 }}
+        style={{ flex: 0.65, backgroundColor: "#000", opacity: 0.7 }}
         onPress={() => setvisible(false)}
       ></Pressable>
       <View
         style={{
-          flex: 0.22,
+          flex: 0.35,
           backgroundColor: "#fff",
           padding: 10,
-          flexDirection: "row",
+          flexDirection: "column",
         }}
       >
-        <View style={{ flexDirection: "row-reverse", flexWrap: "wrap", margin: 10 }}>
-          <Pressable
+        <View
+          style={{ flexDirection: "row-reverse", flexWrap: "wrap", margin: 10 }}
+        >
+          {/* <Pressable
             onPress={() => {
               setCategory((perv) => {
                 if (perv.includes("phone")) {
@@ -52,11 +60,12 @@ export default function ({ visible, setvisible, category, setCategory }) {
             >
               {categoryName("phone")}
             </Text>
-          </Pressable>
+          </Pressable> */}
 
           <Pressable
             onPress={() => {
               setCategory((perv) => {
+                setSort("DESC");
                 if (perv.includes("social")) {
                   return perv.filter((item) => item != "social");
                 } else {
@@ -89,12 +98,13 @@ export default function ({ visible, setvisible, category, setCategory }) {
           <Pressable
             onPress={() => {
               setCategory((perv) => {
+                setSort("DESC");
                 if (perv.includes("simpelRegister")) {
+
                   return perv.filter((item) => item != "simpelRegister");
                 } else {
                   return [...perv, "simpelRegister"];
                 }
- 
               });
               // setCategory("simpelRegister");
               setvisible(false);
@@ -108,7 +118,7 @@ export default function ({ visible, setvisible, category, setCategory }) {
               borderColor: "#2979FF",
               borderWidth: 1,
               marginHorizontal: 10,
-              marginTop: 10
+              marginTop: 10,
             }}
           >
             <Text
@@ -125,7 +135,9 @@ export default function ({ visible, setvisible, category, setCategory }) {
           <Pressable
             onPress={() => {
               setCategory((perv) => {
+                setSort("DESC");
                 if (perv.includes("advanceRegister")) {
+
                   return perv.filter((item) => item != "advanceRegister");
                 } else {
                   return [...perv, "advanceRegister"];
@@ -143,7 +155,7 @@ export default function ({ visible, setvisible, category, setCategory }) {
               borderColor: "#2979FF",
               borderWidth: 1,
               marginHorizontal: 10,
-              marginTop: 10
+              marginTop: 10,
             }}
           >
             <Text
@@ -160,10 +172,12 @@ export default function ({ visible, setvisible, category, setCategory }) {
           <Pressable
             onPress={() => {
               setCategory((perv) => {
+                setSort("DESC");
                 if (perv.includes("installApp")) {
+
                   return perv.filter((item) => item != "installApp");
                 } else {
-                  return [...perv ,"installApp"];
+                  return [...perv, "installApp"];
                 }
                 return perv;
               });
@@ -179,7 +193,7 @@ export default function ({ visible, setvisible, category, setCategory }) {
               borderColor: "#2979FF",
               borderWidth: 1,
               marginHorizontal: 10,
-              marginTop: 10
+              marginTop: 10,
             }}
           >
             <Text
@@ -193,6 +207,27 @@ export default function ({ visible, setvisible, category, setCategory }) {
             </Text>
           </Pressable>
         </View>
+
+        <TouchableOpacity
+          style={{ flexDirection: "row" }}
+          onPress={() => {
+            setCategory([]);
+            setvisible(false);
+          }}
+        >
+          <Text
+            style={{
+              color: "#fff",
+              fontFamily: "vazir",
+              backgroundColor: "#D32F2F",
+              textAlign: "center",
+              padding: 10,
+              borderRadius: 10,
+            }}
+          >
+            حذف فیلتر دسته بندی
+          </Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );

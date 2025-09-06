@@ -27,7 +27,7 @@ export default function (props) {
   const [indexLastChat, setIndexLastChat] = useState();
   const [imageVisibel, setImageVisibel] = useState(false);
   const [imageVisit, setImageVisit] = useState("");
-  const [adIdChat, setAdIdChat] = useState()
+  const [adIdChat, setAdIdChat] = useState();
 
   const scrollRef = useRef(null);
 
@@ -40,7 +40,7 @@ export default function (props) {
         chat: text,
         sender: "user",
         token: await AsyncStorage.getItem("token"),
-        adId: adIdChat
+        adId: adIdChat,
       });
 
       // scrollRef.current.scrollToEnd({animated: true})
@@ -114,7 +114,7 @@ export default function (props) {
             token: await AsyncStorage.getItem("token"),
             type: "image",
             url: response.filename,
-            adId: adIdChat
+            adId: adIdChat,
           });
         };
 
@@ -132,22 +132,25 @@ export default function (props) {
   };
 
   useEffect(() => {
-
     navi.addListener("blur", () => {
       socket.off("chatUser");
       socket.off("userReloadView");
     });
   }, []);
 
-  useFocusEffect(useCallback(() => {
-    if(props.route.params) {
-      console.log(props.route.params.adId);
-      setAdIdChat(props.route.params.adId)
-    }
-    // navi.addListener("focus", () => {
+  useFocusEffect(
+    useCallback(() => {
+      if (props.route.params) {
+        console.log(props.route.params.adId);
+        setAdIdChat(props.route.params.adId);
+      }
+
+
       setLoaded(false);
       getMessage(props.route.params.adId);
+      console.log(adIdChat);
       socket.on("chatUser", async (data) => {
+        console.log(data);
         scrollRef.current.scrollToEnd({ animated: false });
         if (data.type == "image") {
           console.log("image");
@@ -181,12 +184,10 @@ export default function (props) {
       });
       socket.on("userReloadView", () => {
         console.log("user reload");
-        getMessage();
+        getMessage(props.route.params.adId);
       });
-    // });
-
-  }, [props.route.params]))
-
+    }, [props.route.params])
+  );
 
   return (
     <>
@@ -229,6 +230,37 @@ export default function (props) {
               </Text>
             </View>
           </View>
+          {adIdChat && adIdChat != "sup" ? (
+            <View style={{ backgroundColor: "#fff" }}>
+              <TouchableOpacity
+              onPress={() => {
+                navi.navigate("singelAd", {id: adIdChat, btnV: true})
+              }}
+                style={{
+                  flexDirection: "row-reverse",
+                  alignItems: "center",
+                  paddingHorizontal: 20,
+                }}
+              >
+                <Ionicons
+                  name="return-down-back-outline"
+                  size={24}
+                  color="#2979FF"
+                />
+                <Text
+                  style={{
+                    fontFamily: "vazir",
+                    textAlign: "right",
+                    marginRight: 10,
+                  }}
+                >
+                  رفتن به صفحه اگهی
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <></>
+          )}
 
           <View style={{ flex: 0.88, marginTop: 15, paddingHorizontal: 10 }}>
             <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
@@ -253,7 +285,13 @@ export default function (props) {
                           borderRadius: 5,
                         }}
                       >
-                        <Text style={{ fontFamily: "vazir", color: "#fff", textAlign: "center" }}>
+                        <Text
+                          style={{
+                            fontFamily: "vazir",
+                            color: "#fff",
+                            textAlign: "center",
+                          }}
+                        >
                           {chat.chat}
                         </Text>
                       </View>

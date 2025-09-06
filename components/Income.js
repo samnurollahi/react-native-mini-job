@@ -1,5 +1,5 @@
 import Entypo from "@expo/vector-icons/Entypo";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Linking,
@@ -18,49 +18,54 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
   const [cartNumber, setCartNumber] = useState("");
   const [btnDisabel, setBtnDisabel] = useState(true);
   const [isVisibelPreSubmit, setIsVisibelPreSubmit] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const shadow = useRef(null);
 
+  useEffect(() => {
+    validation()
+  }, [count, cartNumber])
   const validation = () => {
     if (+income > 50_000) {
-      if (cartNumber.length == 24) {
-        setBtnDisabel(false);
-      } else {
-        setBtnDisabel(true);
+      console.log(cartNumber);
+      if(cartNumber.length == 24 && count > 50_000 && count < +income) {
+        setBtnDisabel(false)
+      }else {
+        setBtnDisabel(true)
       }
     } else {
-      if (cartNumber.length == 11) {
-        setBtnDisabel(false);
-      } else {
-        setBtnDisabel(true);
-      }
+      if(cartNumber.length == 11 && count > 1_000 && count < +income) {
+        setBtnDisabel(false)
+      }else {
+        setBtnDisabel(true)
+      };
     }
   };
   const preSubmit = () => {
     setIsVisibelPreSubmit(true);
   };
-  const submit = async () => {
-    try {
-      const type = +income > 50_000 ? "cart" : "simcart";
-      const result = await Service.requestToIncome(count, cartNumber, type);
-      setIncomeCount(result.price);
-      setvisible(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+const submit = async () => {
+  // try {
+    setIncomeCount(+income - +count);
+    setvisible(false);
+    const type = +income > 50_000 ? "cart" : "simcart";
+    const result = await Service.requestToIncome(count, cartNumber, type);
+  // } catch (err) {
+  //   console.log(err);
+  // }
+};
 
   return (
     <>
       <Modal visible={visible} transparent={true} animationType="fade">
         <Pressable
           ref={shadow}
-          style={{ flex: 0.3, backgroundColor: "#000", opacity: 0.7 }}
+          style={{ flex: 0.1, backgroundColor: "#000", opacity: 0.7 }}
           onPress={() => setvisible(false)}
         ></Pressable>
         <View
           style={{
-            flex: 0.7,
+            flex: .9,
             backgroundColor: "#fff",
             padding: 10,
           }}
@@ -107,7 +112,7 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
               value={cartNumber}
               onChangeText={(text) => {
                 setCartNumber(text);
-                validation();
+                // validation();
               }}
             />
           ) : (
@@ -125,7 +130,7 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
               value={cartNumber}
               onChangeText={(text) => {
                 setCartNumber(text);
-                validation();
+                // validation();
               }}
             />
           )}
@@ -142,16 +147,9 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
             keyboardType="number-pad"
             value={count}
             onChangeText={(text) => {
-              console.log(income);
               if (+text <= +income) {
-                setCount(() => {
-                  if (text > 0) {
-                    setBtnDisabel(false);
-                  } else {
-                    setBtnDisabel(true);
-                  }
-                  return text;
-                });
+                setCount(text);
+                // validation()
               }
             }}
           />
@@ -160,7 +158,13 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
           </View>
 
           {+income > 50_000 ? (
-            <View style={{flexDirection: "row-reverse", alignItems: "center", marginTop: 20}}>
+            <View
+              style={{
+                flexDirection: "row-reverse",
+                alignItems: "center",
+                marginTop: 20,
+              }}
+            >
               <Entypo name="info" size={24} color="black" />
               <Text
                 style={{
@@ -172,7 +176,13 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
               </Text>
             </View>
           ) : (
-            <View style={{flexDirection: "row-reverse", alignItems: "center", marginTop: 20}}>
+            <View
+              style={{
+                flexDirection: "row-reverse",
+                alignItems: "center",
+                marginTop: 20,
+              }}
+            >
               <Entypo name="info" size={24} color="black" />
               <Text
                 style={{
@@ -184,6 +194,25 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
               </Text>
             </View>
           )}
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <Entypo name="info" size={24} color="black" />
+            <Text
+              style={{
+                fontFamily: "vazir",
+                textAlign: "right",
+                width: "80%",
+                color: "#2979FF"
+              }}
+            >
+              زمانیکه موجودی شما بالای 50 هزار تومان شود گزینه برداشت به حساب برای شما فعال میشود 
+            </Text>
+          </View>
         </View>
       </Modal>
 

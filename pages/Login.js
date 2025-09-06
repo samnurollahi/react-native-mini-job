@@ -55,7 +55,9 @@ export default function () {
             borderWidth: 1,
             borderColor: isError ? "#D32F2F" : "#ccc",
             borderRadius: 5,
-            marginTop: 5,
+            marginTop: 10,
+            height: 50,
+            borderRadius: 10, 
           }}
           keyboardType="number-pad"
           onChangeText={setPhoneNumberText}
