@@ -83,7 +83,7 @@ export default function (data) {
       }
       setLoaded(false);
       getAd(idAd);
-    }, [idAd])
+    }, [idAd, data.route.params])
   );
   return (
     <>

@@ -23,7 +23,7 @@ export default function () {
   const [filterCategoryModal, setFilterCategoryModal] = useState(false);
   const [category, setCategory] = useState([]);
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const getData = async (sort, caregory) => {
     const data = await Service.getAds(sort, caregory);
@@ -31,16 +31,16 @@ export default function () {
     setLoaded(true);
   };
   const renderItem = async ({ item }) => {
-    return (
-      <>
+    return !item.close ? (
       <Ads
-      mode={item.mode}
+        mode={item.mode}
         title={item.title}
         price={item.price}
         categorys={JSON.parse(item.caregory)}
         id={item.id}
       />
-      </>
+    ) : (
+      <></>
     );
   };
 
@@ -48,7 +48,7 @@ export default function () {
     navigation.addListener("focus", () => {
       setLoaded(false);
       getData(sort, category);
-    })
+    });
     setLoaded(false);
     getData(sort, category);
   }, [sort, category]);
@@ -56,11 +56,9 @@ export default function () {
     <>
       {loaded ? (
         <>
-          <View
-            style={{ flexDirection: "row-reverse" }}
-          >
+          <View style={{ flexDirection: "row-reverse" }}>
             <Pressable
-            onPress={()=>setFilterCategoryModal(true)}
+              onPress={() => setFilterCategoryModal(true)}
               style={{
                 flexDirection: "row-reverse",
                 display: "flex",
@@ -111,7 +109,13 @@ export default function () {
             </Pressable>
           </View>
 
-          <View style={{ flex: 1, flexDirection: "row-reverse", paddingHorizontal: 25 }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row-reverse",
+              paddingHorizontal: 25,
+            }}
+          >
             <FlatList
               style={{ flex: 1 }}
               data={ads}
