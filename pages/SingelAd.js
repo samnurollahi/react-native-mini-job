@@ -27,7 +27,8 @@ export default function (data) {
   const [ad, setAd] = useState({});
   const [viewImage, setViewImage] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
-  const [btnV, setBtnV] = useState(false)
+  const [btnV, setBtnV] = useState(false);
+  const [error, setError] = useState(false);
 
   const socket = useSocket();
   const navigation = useNavigation();
@@ -51,7 +52,7 @@ export default function (data) {
     setViewImage(true);
   };
   const anjamMidam = async () => {
-    setBtnV(true)
+    setBtnV(true);
     try {
       const token = await AsyncStorage.getItem("token");
       socket.emit("requestToAnjamProject", {
@@ -68,6 +69,9 @@ export default function (data) {
         // navigation.navigate("chat", {adId: ad.id})
         navigation.navigate("report");
       });
+      socket.on("error", () => {
+        setError(true);
+      });
     } catch (err) {
       console.log(err);
     }
@@ -75,11 +79,11 @@ export default function (data) {
 
   useFocusEffect(
     useCallback(() => {
-      if(data.route.params.btnV) {
+      if (data.route.params.btnV) {
         console.log(data.route.params);
-        setBtnV(true)
-      }else {
-        setBtnV(false)
+        setBtnV(true);
+      } else {
+        setBtnV(false);
       }
       setLoaded(false);
       getAd(idAd);
@@ -139,7 +143,7 @@ export default function (data) {
                   }}
                 >
                   <Text style={{ marginRight: 8 }}>
-                    دستمزد آنجام این کار: : {numberWithCommas(ad.price)} تومان
+                    دستمزد انجام این کار: : {numberWithCommas(ad.price)} تومان
                   </Text>
                   <FontAwesome5
                     name="money-bill-wave"
@@ -354,6 +358,20 @@ export default function (data) {
               }}
             >
               <Button title="انجام میدم" onPress={anjamMidam} disabled={btnV} />
+              {error ? (
+                <Text
+                  style={{
+                    textAlign: "right",
+                    fontFamily: "vazir",
+                    marginTop: 3,
+                    color: "red",
+                  }}
+                >
+                  شما نمی توانید دوبار برای یک اگهی درخواست ارسال کنید
+                </Text>
+              ) : (
+                <></>
+              )}
             </View>
 
             <ImageViewing

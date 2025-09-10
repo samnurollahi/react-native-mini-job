@@ -8,7 +8,6 @@ const socketContext = createContext()
 export default function({children}) {
     const [socket, setSocket] = useState(null)
 
-
     useEffect(() => {
         const newSocket = io("https://komakkharj.ir")
 

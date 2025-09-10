@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native-animatable";
 import { FlatList, Text, TouchableOpacity } from "react-native";
 import HistoryComponent from "../components/HistoryComponent";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function () {
   const [data, setData] = useState();
@@ -28,11 +29,14 @@ export default function () {
 
   return (
     <View style={{ marginTop: 15 }}>
+      <SafeAreaView>
         <FlatList
                 data={data}
                 renderItem={renderItem}
                 key={item => item.id}
         />
+
+      </SafeAreaView>
     </View>
   );
 }

@@ -18,42 +18,100 @@ export default function ({ visible, setvisible, income, setIncomeCount }) {
   const [cartNumber, setCartNumber] = useState("");
   const [btnDisabel, setBtnDisabel] = useState(true);
   const [isVisibelPreSubmit, setIsVisibelPreSubmit] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const shadow = useRef(null);
+  const cartNumberRef = useRef(null);
+  const countRef = useRef(null);
 
   useEffect(() => {
-    validation()
-  }, [count, cartNumber])
+    
+    validation();
+  }, [count, cartNumber]);
   const validation = () => {
     if (+income > 50_000) {
-      console.log(cartNumber);
-      if(cartNumber.length == 24 && count > 50_000 && count < +income) {
-        setBtnDisabel(false)
-      }else {
-        setBtnDisabel(true)
+      // border check
+      if (cartNumberRef.current && cartNumber.length == 24) {
+        cartNumberRef.current?.setNativeProps({
+          style: {
+            borderColor: "#ccc",
+          },
+        });
+      } else {
+        cartNumberRef.current?.setNativeProps({
+          style: {
+            borderColor: "red",
+          },
+        });
+      }
+      if (countRef.current && count > 50_000 && count < +income) {
+        countRef.current?.setNativeProps({
+          style: {
+            borderColor: "#ccc",
+          },
+        });
+      } else {
+        countRef.current?.setNativeProps({
+          style: {
+            borderColor: "red",
+          },
+        });
+      }
+
+      if (cartNumber.length == 24 && count > 50_000 && count < +income) {
+        setBtnDisabel(false);
+      } else {
+        setBtnDisabel(true);
       }
     } else {
-      if(cartNumber.length == 11 && count > 1_000 && count < +income) {
-        setBtnDisabel(false)
-      }else {
-        setBtnDisabel(true)
-      };
+      // check border
+      if (cartNumberRef.current && cartNumber.length == 11) {
+        cartNumberRef.current?.setNativeProps({
+          style: {
+            borderColor: "#ccc",
+          },
+        });
+      } else {
+        cartNumberRef.current?.setNativeProps({
+          style: {
+            borderColor: "red",
+          },
+        });
+      }
+      if (countRef.current && count > 1_000 && count < +income) {
+        countRef.current?.setNativeProps({
+          style: {
+            borderColor: "#ccc",
+          },
+        });
+      } else {
+        countRef.current?.setNativeProps({
+          style: {
+            borderColor: "red",
+          },
+        });
+      }
+
+      if (cartNumber.length == 11 && count > 1_000 && count < +income) {
+        setBtnDisabel(false);
+      } else {
+        setBtnDisabel(true);
+      }
     }
   };
   const preSubmit = () => {
     setIsVisibelPreSubmit(true);
   };
-const submit = async () => {
-  // try {
+  const submit = async () => {
+    // try {
     setIncomeCount(+income - +count);
     setvisible(false);
     const type = +income > 50_000 ? "cart" : "simcart";
     const result = await Service.requestToIncome(count, cartNumber, type);
-  // } catch (err) {
-  //   console.log(err);
-  // }
-};
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
 
   return (
     <>
@@ -65,7 +123,7 @@ const submit = async () => {
         ></Pressable>
         <View
           style={{
-            flex: .9,
+            flex: 0.9,
             backgroundColor: "#fff",
             padding: 10,
           }}
@@ -106,6 +164,7 @@ const submit = async () => {
                 marginTop: 30,
                 fontFamily: "vazir",
               }}
+              ref={cartNumberRef}
               keyboardType="number-pad"
               placeholder="شماره شبا را بدون IR وارد کنید"
               maxLength={24}
@@ -124,6 +183,7 @@ const submit = async () => {
                 marginTop: 30,
                 fontFamily: "vazir",
               }}
+              ref={cartNumberRef}
               keyboardType="number-pad"
               placeholder="شماره موبایل"
               maxLength={11}
@@ -146,6 +206,7 @@ const submit = async () => {
             placeholder="مبلغ ( تومان )"
             keyboardType="number-pad"
             value={count}
+            ref={countRef}
             onChangeText={(text) => {
               if (+text <= +income) {
                 setCount(text);
@@ -207,10 +268,11 @@ const submit = async () => {
                 fontFamily: "vazir",
                 textAlign: "right",
                 width: "80%",
-                color: "#2979FF"
+                color: "#2979FF",
               }}
             >
-              زمانیکه موجودی شما بالای 50 هزار تومان شود گزینه برداشت به حساب برای شما فعال میشود 
+              زمانیکه موجودی شما بالای 50 هزار تومان شود گزینه برداشت به حساب
+              برای شما فعال میشود
             </Text>
           </View>
         </View>

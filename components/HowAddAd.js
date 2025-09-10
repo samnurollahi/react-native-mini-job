@@ -34,7 +34,7 @@ export default function ({ visible, setvisible }) {
             color: "#2979FF"
           }}
         >
-          برای ثبت اگهی خود به ایدی زیر در تلگرام پیاد دهید
+جهت ثبت آگهی در تلگرام به نشانی زیر با ما در ارتباط باشید.
         </Text>
           <Pressable onPress={openTelegram} style={{flexDirection: "row-reverse", flexDirection: "row", alignItems: "center"}}>
             <FontAwesome6 name="telegram" size={24} color="#2979FF" />

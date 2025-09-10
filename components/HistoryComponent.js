@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
 import numberWithCommas from "../utils/numberWithCommas";
+import handelDate from "../utils/handelDate";
 
 export default function ({ date, status, cartNumber, count }) {
   return (
@@ -36,7 +37,9 @@ export default function ({ date, status, cartNumber, count }) {
         >
             {status == "witing" ? "در انتظار" : "پرداخت شده"}
         </Text>
-        <Text style={{ fontFamily: "vazir" }}>1402/02/07</Text>
+        <Text style={{ fontFamily: "vazir" }}>
+          {handelDate(date)}  
+        </Text>
       </View>
     </View>
   );

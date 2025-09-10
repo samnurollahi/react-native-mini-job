@@ -70,6 +70,7 @@ export default function ({ visible, setvisible }) {
                 fontFamily: "vazir",
                 color: "#D32F2F",
                 flexDirection: "row-reverse",
+                textAlign: 'right'
               }}
             >
               کد معرف وارد شده اشتباه است

@@ -200,11 +200,11 @@ export default function (props) {
             style={{
               flexDirection: "row-reverse",
               alignItems: "center",
-              padding: 20,
+              padding: 5,
               backgroundColor: "#fff",
             }}
           >
-            <AntDesign
+            {/* <AntDesign
               name="customerservice"
               size={35}
               color="#2979FF"
@@ -216,7 +216,7 @@ export default function (props) {
               }}
             />
             <View
-              style={{ alignItems: "flex-start", justifyContent: "flex-start" }}
+              style={{ alignItems: "flex-end", justifyContent: "flex-end" }}
             >
               <Text
                 style={{ marginRight: 15, fontFamily: "vazir", fontSize: 15 }}
@@ -226,9 +226,9 @@ export default function (props) {
               <Text
                 style={{ fontFamily: "vazir", color: "#5f6368", fontSize: 13 }}
               >
-                با احترام پاسخگوی شمایم
+              با احترام پاسخگوی شما هستیم
               </Text>
-            </View>
+            </View> */}
           </View>
           {adIdChat && adIdChat != "sup" ? (
             <View style={{ backgroundColor: "#fff" }}>
@@ -240,11 +240,13 @@ export default function (props) {
                   flexDirection: "row-reverse",
                   alignItems: "center",
                   paddingHorizontal: 20,
+                  borderBottomWidth: 1,
+                  borderBottomColor: "red"
                 }}
               >
                 <Ionicons
                   name="return-down-back-outline"
-                  size={24}
+                  size={27}
                   color="#2979FF"
                 />
                 <Text
@@ -252,6 +254,7 @@ export default function (props) {
                     fontFamily: "vazir",
                     textAlign: "right",
                     marginRight: 10,
+                    fontSize: 15
                   }}
                 >
                   رفتن به صفحه اگهی
